@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postdoc Decision Engine — Dashboard</title>
+<style>
+  :root{--blue:#275df5;--navy:#091e42;--bg:#f4f7fb;--card:#fff;--muted:#6b7a90;--green:#1c9e6d;--amber:#e08a00;--red:#d64545;--chip:#eef3fd;}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,Arial,sans-serif;}
+  body{background:var(--bg);color:var(--navy);}
+  header{background:#fff;border-bottom:1px solid #e3e9f2;padding:14px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:10;}
+  header .logo{font-size:1.3rem;font-weight:700;color:var(--blue);}
+  header .logo span{color:var(--navy);}
+  #search{flex:1;min-width:220px;max-width:520px;padding:10px 16px;border:1.5px solid #d7e0ee;border-radius:24px;font-size:.95rem;outline:none;}
+  #search:focus{border-color:var(--blue);}
+  .updated{font-size:.8rem;color:var(--muted);}
+  .stats{display:flex;gap:14px;padding:18px 28px;flex-wrap:wrap;}
+  .stat{background:var(--card);border-radius:12px;padding:14px 20px;box-shadow:0 1px 4px rgba(9,30,66,.08);min-width:150px;}
+  .stat b{font-size:1.5rem;display:block;}
+  .stat small{color:var(--muted);}
+  nav.tabs{display:flex;gap:8px;padding:0 28px 6px;flex-wrap:wrap;}
+  .tab{padding:8px 18px;border-radius:20px;border:1.5px solid #d7e0ee;background:#fff;cursor:pointer;font-size:.9rem;font-weight:600;color:var(--muted);}
+  .tab.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+  main{padding:12px 28px 40px;display:grid;grid-template-columns:2.1fr 1fr;gap:20px;align-items:start;}
+  @media(max-width:980px){main{grid-template-columns:1fr;}}
+  .cards{display:flex;flex-direction:column;gap:14px;}
+  .card{background:var(--card);border-radius:14px;padding:18px 20px;box-shadow:0 1px 5px rgba(9,30,66,.09);border-left:5px solid #d7e0ee;}
+  .card.hot{border-left-color:var(--red);}
+  .card.good{border-left-color:var(--green);}
+  .card.submitted{border-left-color:var(--blue);}
+  .card h3{font-size:1.05rem;margin-bottom:2px;}
+  .card .org{color:var(--muted);font-size:.88rem;margin-bottom:8px;}
+  .rowline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0;}
+  .score{font-weight:800;font-size:1.15rem;}
+  .score.pass{color:var(--green);} .score.fail{color:var(--amber);}
+  .bar{flex:1;max-width:220px;height:8px;background:#e9eef7;border-radius:6px;overflow:hidden;}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#5b8def,var(--blue));}
+  .chip{background:var(--chip);color:var(--blue);border-radius:14px;padding:3px 11px;font-size:.75rem;font-weight:600;}
+  .chip.red{background:#fdecec;color:var(--red);} .chip.amber{background:#fdf3e3;color:var(--amber);} .chip.green{background:#e6f6ef;color:var(--green);} .chip.grey{background:#eef1f6;color:var(--muted);}
+  .subs{display:flex;gap:14px;font-size:.78rem;color:var(--muted);flex-wrap:wrap;margin-top:6px;}
+  .apply{margin-left:auto;background:var(--blue);color:#fff;border:none;border-radius:20px;padding:7px 18px;font-weight:600;font-size:.85rem;cursor:pointer;text-decoration:none;}
+  .apply.ghost{background:#fff;color:var(--blue);border:1.5px solid var(--blue);}
+  aside .panel{background:var(--card);border-radius:14px;padding:16px 18px;box-shadow:0 1px 5px rgba(9,30,66,.09);margin-bottom:16px;}
+  aside h4{font-size:.95rem;margin-bottom:10px;color:var(--navy);}
+  .mile{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px dashed #e3e9f2;font-size:.85rem;}
+  .mile:last-child{border-bottom:none;}
+  .dleft{font-weight:700;white-space:nowrap;}
+  .dleft.red{color:var(--red);} .dleft.amber{color:var(--amber);} .dleft.ok{color:var(--green);}
+  table{width:100%;border-collapse:collapse;font-size:.8rem;}
+  th,td{text-align:left;padding:5px 6px;border-bottom:1px solid #eef1f6;}
+  th{color:var(--muted);font-weight:600;}
+  .log li{font-size:.82rem;margin:0 0 8px 16px;color:#33415c;}
+  .rubric span{display:inline-block;margin:2px 6px 2px 0;font-size:.78rem;background:#eef1f6;border-radius:12px;padding:2px 10px;}
+  footer{padding:0 28px 30px;font-size:.78rem;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Postdoc<span>Engine</span></div>
+  <input id="search" placeholder="Search by title, institute, country, keyword…">
+  <div class="updated">Owner: Rona Maria Sunil · Last scan: <b id="lastScan"></b> · Next scan: <b id="nextScan"></b></div>
+</header>
+
+<div class="stats" id="stats"></div>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-f="all">All</button>
+  <button class="tab" data-f="shortlist">Shortlist ≥7.0</button>
+  <button class="tab" data-f="urgent">Urgent deadlines</button>
+  <button class="tab" data-f="submitted">Submitted / In progress</button>
+  <button class="tab" data-f="watch">Watch (&lt;7.0)</button>
+  <button class="tab" data-f="lead">Leads &amp; hosts</button>
+</nav>
+
+<main>
+  <section class="cards" id="cards"></section>
+
+  <aside>
+    <div class="panel">
+      <h4>⏰ Deadlines &amp; milestones</h4>
+      <div id="miles"></div>
+    </div>
+    <div class="panel">
+      <h4>📏 Rubric (Section 2) — threshold ≥ 7.0</h4>
+      <div class="rubric">
+        <span>Family &amp; financial 30%</span><span>Research fit 25%</span><span>India-return 20%</span><span>Prestige 15%</span><span>Permanence 10%</span>
+      </div>
+    </div>
+    <div class="panel">
+      <h4>💰 Financial reality map (couple savings/yr)</h4>
+      <table>
+        <tr><th>Venue</th><th>Savings</th><th>Spouse work</th></tr>
+        <tr><td>KAUST</td><td>₹35–50 L</td><td>Dependent visa</td></tr>
+        <tr><td>Switzerland</td><td>₹30–45 L</td><td>Yes</td></tr>
+        <tr><td>Singapore</td><td>₹25–40 L</td><td>Yes</td></tr>
+        <tr><td>Netherlands</td><td>₹18–28 L</td><td>Yes, full</td></tr>
+        <tr><td>Germany</td><td>₹15–25 L</td><td>Yes</td></tr>
+        <tr><td>Scandinavia</td><td>₹15–22 L</td><td>Yes</td></tr>
+        <tr><td>Italy (ICTP)</td><td>verify</td><td>verify — Rule 2</td></tr>
+        <tr><td>Japan (JSPS)</td><td>₹12–20 L</td><td>Needs permission</td></tr>
+        <tr><td>China (CAS + top-ups)</td><td>₹15–25 L est.</td><td>Unclear — Rule 2</td></tr>
+        <tr><td>USA</td><td>₹10–20 L</td><td>J-2 EAD</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <h4>📜 Scan log</h4>
+      <ul class="log" id="log"></ul>
+    </div>
+  </aside>
+</main>
+
+<footer>Standing rules: nothing &lt;7.0 gets application time unless strategic · spouse work rights never assumed · every application serves the India-return story · fellowship beats project on ties · submit 3–4 days before deadline · Rona approves everything before it leaves the machine.</footer>
+
+<script>
+/* ============================================================
+   DATA BLOCK — updated by Claude on every 5-day scan run.
+   Edit only this section; the page renders itself.
+   ============================================================ */
+const META = { lastScan: "2026-07-12", nextScan: "2026-07-13 (Gothenburg push)" };
+
+const JOBS = [
+ {t:"CCRS Singapore — Centre for Climate Research",org:"CCRS / Met Service Singapore",loc:"Singapore",score:8.10,s:[9,9,7,7,7],status:"Find contact",tier:"shortlist",deadline:null,link:"https://www.weather.gov.sg/ccrs/",tags:["monsoon","ISV","4hr from Kochi","rolling"]},
+ {t:"MSCA-PF @ TU Delft (QPE × ISV)",org:"TU Delft · EU MSCA fellowship",loc:"Netherlands",score:8.05,s:[8,9,8,8,6],status:"Draft due — skeleton 23 Jul",tier:"shortlist",deadline:"2026-09-10",link:"https://marie-sklodowska-curie-actions.ec.europa.eu/actions/postdoctoral-fellowships",tags:["fellowship","QPE","radar","family allowance"]},
+ {t:"ETH Zurich Postdoctoral Fellowship",org:"ETH Zurich",loc:"Switzerland",score:7.80,s:[9,7,8,9,6],status:"Host PI TBD — contact by 27 Aug",tier:"shortlist",deadline:"2026-09-01",link:"https://ethz.ch/en/research/research-promotion/eth-fellowships.html",tags:["fellowship","highest savings tier"]},
+ {t:"TU Delft EuRadCA — Radar QPE Postdoc",org:"TU Delft",loc:"Netherlands",score:7.75,s:[7,9,8,8,6],status:"Submitted ✔",tier:"submitted",deadline:null,link:"https://careers.tudelft.nl/job/Delft-Postdoc-in-Radar-Based-Quantitative-Precipitation-Estimation-within-project-EuRadCA-2628-CD/1361379657/",tags:["radar","QPE","OPERA","submitted"]},
+ {t:"ICTP ESP — ML Climate Downscaling (C3S, 2 posts)",org:"ICTP Trieste · Copernicus C3S",loc:"Italy",score:7.30,s:[6,8,9,8,5],status:"URGENT — submit by 14–15 Jul (Rule 5)",tier:"shortlist",deadline:"2026-07-18",link:"https://www.ictp.it/opportunity/earth-system-physics-postdoctoral-fellowships-2026",tags:["deep learning","downscaling","PyTorch","India brand ★","2+1 yr"]},
+ {t:"ICTP ESP — Extremes Attribution (CLOSER, 2 posts)",org:"ICTP Trieste · HORIZON CLOSER",loc:"Italy",score:6.80,s:[6,6,9,8,5],status:"Strategic — same portal as C3S",tier:"watch",deadline:"2026-07-18",link:"https://www.ictp.it/news/2026/6/four-climate-postdoc-positions-available",tags:["attribution","RCM","Fortran"]},
+ {t:"JSPS Postdoctoral Fellowship",org:"JSPS Japan",loc:"Japan",score:6.95,s:[6,7,8,8,6],status:"Scout host at AOGS (1–7 Aug)",tier:"watch",deadline:null,link:"https://www.jsps.go.jp/english/e-ippan/",tags:["fellowship","prestige","spouse work harder"]},
+ {t:"KAUST Postdoc",org:"KAUST",loc:"Saudi Arabia",score:6.85,s:[10,5,6,6,5],status:"Verify research fit",tier:"watch",deadline:null,link:"https://www.kaust.edu.sa/en/study/postdoctoral-fellows",tags:["tax-free","housing","₹35–50L/yr"]},
+ {t:"KIT/HITS — ML Weather Calibration (WOW project)",org:"KIT & HITS Heidelberg (Gneiting/Nowack/Stühmer)",loc:"Germany",score:6.65,s:[6,7,7,8,5],status:"Safety net — decide by ~26 Jul",tier:"watch",deadline:"2026-07-30",link:"https://www.nature.com/naturecareers/job/12861291/postdoctoral-researcher-f-m-d-in-computer-science-or-statistics/",tags:["verification","scoring rules","ML weather"]},
+ {t:"Gothenburg PAR 2026/530",org:"University of Gothenburg",loc:"Sweden",score:6.45,s:[7,6,6,7,6],status:"Submitting — target 28 Jul",tier:"submitted",deadline:"2026-07-31",link:"https://www.gu.se/en/work-at-the-university-of-gothenburg/vacancies",tags:["in progress"]},
+ {t:"GFZ Potsdam — GenAI4Earth Postdoc",org:"GFZ / Helmholtz",loc:"Germany",score:6.35,s:[7,6,6,7,5],status:"Below threshold — not pursued",tier:"watch",deadline:"2026-07-22",link:"https://www.nature.com/naturecareers/job/12861313/postdoctoral-researcher-f_m_x-generative-ai-for-earth-system-sciences",tags:["generative AI","3-yr TVöD 13"]},
+ {t:"Columbia Lamont-Doherty — PDRS Radiation/Circulation",org:"Columbia University",loc:"USA",score:6.00,s:[5,6,7,8,4],status:"Open until filled — watch",tier:"watch",deadline:null,link:"https://academic.careers.columbia.edu/#!/183751",tags:["theory","Lamont brand"]},
+ {t:"Penn State EESI — PCHES-ADAPT Postdoc",org:"Penn State",loc:"USA",score:5.85,s:[5,6,7,7,4],status:"Below threshold — not pursued",tier:"watch",deadline:"2026-07-19",link:"https://findajob.agu.org/job/8026736/postdoctoral-scholar-in-transdisciplinary-climate-research/",tags:["climate extremes","DOE"]},
+ {t:"Exeter — NATALIE AI for Nature-Based Solutions",org:"University of Exeter",loc:"UK",score:5.40,s:[5,5,6,7,4],status:"Below threshold — ~23-month contract",tier:"watch",deadline:"2026-08-20",link:"https://www.jobs.ac.uk/job/DSE987/postdoctoral-research-fellow",tags:["AI","hydro-climate"]},
+ {t:"Birmingham HEPPI-ML — outreach target",org:"Univ. of Birmingham · WCSSP India",loc:"UK",score:null,s:null,status:"Ads expired — draft speculative email to PI",tier:"lead",deadline:null,link:"https://www.jobs.ac.uk/",tags:["monsoon precipitation","post-processing ML","~9/10 fit"]},
+ {t:"MPI-M Hamburg — Incubator Program (MSCA/Humboldt host)",org:"Max Planck Institute for Meteorology",loc:"Germany",score:null,s:null,status:"1-page idea + CV to group leader — serves MSCA 23 Jul + Humboldt Oct",tier:"lead",deadline:null,link:"https://mpimet.mpg.de/en/career/postdoc-opportunities",tags:["funded stay €2,500/mo","tropical waves groups","host route"]},
+ {t:"Kyoto Univ. RISH — Radar Atmospheric Science Lab (JSPS host target)",org:"RISH, Kyoto University (MU radar)",loc:"Japan",score:null,s:null,status:"JSPS host candidate — scout at AOGS 1–7 Aug; MU radar is the sister instrument to ACARR VHF",tier:"lead",deadline:null,link:"https://www.rish.kyoto-u.ac.jp/category/news_en/?lang=en",tags:["VHF ST radar","MU radar","JSPS route","perfect radar fit"]},
+ {t:"IAP-CAS Beijing — Monsoon/ISV group (Prof. Lin Wang)",org:"Institute of Atmospheric Physics, Chinese Academy of Sciences",loc:"China",score:null,s:null,status:"Group states postdoc openings — contact PI directly; spouse work rights unclear → Rule 2 HR query before anything",tier:"lead",deadline:null,link:"https://sforest81.github.io/en/",tags:["Asian monsoon","intraseasonal predictability","direct outreach","verify visa"]}
+];
+
+const MILESTONES = [
+ {d:"2026-07-15",t:"ICTP ESP application — Rule 5 target (portal closes 18 Jul)"},
+ {d:"2026-07-19",t:"Penn State EESI closes (not pursued)"},
+ {d:"2026-07-22",t:"GFZ GenAI4Earth closes (not pursued)"},
+ {d:"2026-07-23",t:"MSCA-PF skeleton due"},
+ {d:"2026-07-26",t:"KIT/HITS decision point (closes 30 Jul)"},
+ {d:"2026-07-28",t:"Gothenburg PAR 2026/530 — SUBMIT target (deadline 31 Jul)"},
+ {d:"2026-08-01",t:"AOGS Fukuoka 1–7 Aug — poster AS45-A005; JSPS host scouting; KEEP BOARDING PASSES"},
+ {d:"2026-08-27",t:"ETH host PI contacted (cycle ~1 Sep)"},
+ {d:"2026-09-06",t:"MSCA-PF submit target (deadline ~10 Sep — verify on EU portal)"},
+ {d:"2026-10-16",t:"ANRF travel claim courier (form + boarding passes + BAF cert)"},
+ {d:"2026-10-31",t:"Humboldt draft/submit window"}
+];
+
+const LOG = [
+ "12 Jul 2026 · Scan #1 — EURAXESS, AGU, Nature, jobs.ac.uk. Appended KIT/HITS 6.65 (safety net). Leads: Birmingham HEPPI-ML, MPI-M Incubator. Discarded stale MPI-M W079 (2021).",
+ "12 Jul 2026 · RAG re-run (Apify) — found ICTP ESP 4 posts: C3S ML downscaling 7.30 ✅ appended (URGENT 18 Jul), CLOSER 6.80 appended (strategic). GEWEX page added as standing source.",
+ "12 Jul 2026 · Japan/China sweep — no dated postings; added leads: Kyoto RISH radar lab (JSPS host) and IAP-CAS monsoon/ISV group (direct outreach). China added to financial map (spouse work rights unverified)."
+];
+
+/* ============================================================
+   RENDER — no need to edit below.
+   ============================================================ */
+const today = new Date(); today.setHours(0,0,0,0);
+const days = d => Math.round((new Date(d) - today) / 864e5);
+const dChip = d => { if(d===null||d===undefined) return ""; const n = days(d);
+  if(n < 0)  return `<span class="chip grey">closed ${new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>`;
+  const cls = n<=7?"red":n<=15?"amber":"green";
+  return `<span class="chip ${cls}">⏳ ${n} day${n===1?"":"s"} left · ${new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>`; };
+
+function render(filter="all", q=""){
+  q = q.toLowerCase();
+  const el = document.getElementById("cards"); el.innerHTML = "";
+  let list = JOBS.filter(j=>{
+    if(filter==="shortlist") return j.score>=7;
+    if(filter==="urgent") return j.deadline && days(j.deadline)>=0 && days(j.deadline)<=15;
+    if(filter==="submitted") return j.tier==="submitted";
+    if(filter==="watch") return j.tier==="watch";
+    if(filter==="lead") return j.tier==="lead";
+    return true;
+  }).filter(j => !q || (j.t+j.org+j.loc+j.tags.join(" ")).toLowerCase().includes(q));
+  list.sort((a,b)=>(b.score??-1)-(a.score??-1));
+  for(const j of list){
+    const urgent = j.deadline && days(j.deadline)>=0 && days(j.deadline)<=7;
+    const cls = j.tier==="submitted"?"submitted":(j.score>=7?(urgent?"hot":"good"):(urgent?"hot":""));
+    const scoreHtml = j.score!=null
+      ? `<span class="score ${j.score>=7?"pass":"fail"}">${j.score.toFixed(2)}</span>
+         <div class="bar"><i style="width:${j.score*10}%"></i></div>
+         ${j.score>=7?'<span class="chip green">≥ 7.0 shortlist</span>':'<span class="chip amber">below 7.0</span>'}`
+      : `<span class="chip">lead — not scored</span>`;
+    const subs = j.s ? `<div class="subs"><span>Stability ${j.s[0]}/10</span><span>Fit ${j.s[1]}/10</span><span>India ${j.s[2]}/10</span><span>Prestige ${j.s[3]}/10</span><span>Permanence ${j.s[4]}/10</span></div>` : "";
+    el.insertAdjacentHTML("beforeend", `
+      <div class="card ${cls}">
+        <div class="rowline"><h3>${j.t}</h3><a class="apply" href="${j.link}" target="_blank">View / Apply</a></div>
+        <div class="org">${j.org} · ${j.loc}</div>
+        <div class="rowline">${scoreHtml} ${dChip(j.deadline)}</div>
+        ${subs}
+        <div class="rowline">${j.tags.map(t=>`<span class="chip">${t}</span>`).join("")}</div>
+        <div class="rowline"><span class="chip ${urgent?"red":"grey"}">Status: ${j.status}</span></div>
+      </div>`);
+  }
+  if(!list.length) el.innerHTML = '<div class="card"><h3>No matches</h3><div class="org">Try another tab or search term.</div></div>';
+}
+
+function renderSide(){
+  document.getElementById("lastScan").textContent = META.lastScan;
+  document.getElementById("nextScan").textContent = META.nextScan;
+  const above = JOBS.filter(j=>j.score>=7).length;
+  const urgent = JOBS.filter(j=>j.deadline && days(j.deadline)>=0 && days(j.deadline)<=7).length;
+  const nextD = MILESTONES.map(m=>days(m.d)).filter(n=>n>=0).sort((a,b)=>a-b)[0];
+  document.getElementById("stats").innerHTML = `
+    <div class="stat"><b>${JOBS.length}</b><small>openings & leads tracked</small></div>
+    <div class="stat"><b style="color:var(--green)">${above}</b><small>at or above 7.0</small></div>
+    <div class="stat"><b style="color:var(--red)">${urgent}</b><small>deadlines within 7 days</small></div>
+    <div class="stat"><b>${nextD??"—"}</b><small>days to next milestone</small></div>`;
+  document.getElementById("miles").innerHTML = MILESTONES.map(m=>{
+    const n = days(m.d); const cls = n<0?"":"dleft "+(n<=7?"red":n<=15?"amber":"ok");
+    const label = n<0 ? "done/past" : n+"d";
+    return `<div class="mile"><span>${m.t}</span><span class="${cls}">${label}</span></div>`;}).join("");
+  document.getElementById("log").innerHTML = LOG.map(l=>`<li>${l}</li>`).join("");
+}
+
+document.getElementById("tabs").addEventListener("click", e=>{
+  if(!e.target.dataset.f) return;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  e.target.classList.add("active");
+  render(e.target.dataset.f, document.getElementById("search").value);
+});
+document.getElementById("search").addEventListener("input", e=>{
+  const f = document.querySelector(".tab.active").dataset.f;
+  render(f, e.target.value);
+});
+
+renderSide(); render();
+</script>
+</body>
+</html>

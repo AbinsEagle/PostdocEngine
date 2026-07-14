@@ -1,120 +1,36 @@
-# PostdocEngine
+# PostdocEngine — Postdoc Decision Engine
 
-A full-stack web app for early-career researchers that brings four things
-into one place:
+A personal, spec-driven system that helps **Rona Maria Sunil** (ACARR-CUSAT,
+tropical meteorology) run a disciplined postdoc search on a 5-day scan cycle.
+It is operated collaboratively with Claude: Claude scans job boards, scores
+openings against a fixed rubric, tracks deadlines, and drafts outreach — Rona
+approves everything before it leaves the machine.
 
-1. **Job finder** — browse and search a board of postdoc positions.
-2. **Application tracker** — a Kanban-style pipeline (interested → applied →
-   interview → offer → …) with notes and next-action reminders.
-3. **Match / recommendation engine** — ranks positions against your research
-   profile with an explainable keyword/field scoring model.
-4. **Research productivity tool** — track papers, grants, experiments, and
-   notes and their status.
+## Files
 
-## Stack
+| File | Role |
+|------|------|
+| `postdoc_decision_engine_v2.md` | **The spec.** Candidate snapshot, scoring rubric (Section 2), financial map, deadlines, scored shortlist (Section 5), and the standing decision rules (Section 7). Section 0 is the operating procedure for each scan. |
+| `dashboard.html` | **The dashboard.** A self-contained page that renders openings, scores, live deadline countdowns, milestones, and the scan log. Only its `DATA BLOCK` (META, JOBS, MILESTONES, LOG arrays) is edited each run — the page computes everything else itself. Open it in any browser. |
+| `applications_log.md` | **The log.** Append-only record of each scan: boards checked, openings scored, leads, discards, deadlines flagged, and drafted emails. |
 
-| Layer     | Tech                                                   |
-|-----------|--------------------------------------------------------|
-| Frontend  | React 18 + TypeScript + Vite + React Router            |
-| Backend   | FastAPI + SQLAlchemy 2.0 (Pydantic v2)                 |
-| Database  | SQLite by default; Postgres-ready via `DATABASE_URL`   |
+## How a scan works (Section 0 summary)
 
-```
-PostdocEngine/
-├── backend/          # FastAPI application
-│   └── app/
-│       ├── main.py           # app factory, startup, meta routes
-│       ├── models.py         # SQLAlchemy models
-│       ├── schemas.py        # Pydantic schemas
-│       ├── matching.py       # recommendation engine
-│       ├── seed.py           # sample data
-│       └── routers/          # profile, positions, applications, research, recommendations
-└── frontend/         # React + Vite SPA
-    └── src/
-        ├── api.ts            # typed API client
-        ├── App.tsx           # routes + current-researcher context
-        ├── components/Layout.tsx
-        └── pages/            # Dashboard, Jobs, Applications, Research, Profile
-```
+1. Read `postdoc_decision_engine_v2.md` in full — Sections 2 (rubric) and 7 (rules) govern all decisions.
+2. Browse EURAXESS, AGU Careers, Nature Careers, jobs.ac.uk, academicpositions.eu, and GEWEX for new openings matching: *monsoon, intraseasonal, BSISO, MJO, radar meteorology, QPE, precipitation, machine-learning weather, tropical convection*.
+3. Score each new opening 0–10 on every rubric criterion; compute the weighted score (threshold **≥ 7.0**).
+4. Check every Section 4 deadline against today; flag anything within 10 days.
+5. **Show Rona the results before editing any file.** After approval: append openings ≥ 7.0 to Section 5, update the `dashboard.html` data block, and log the run in `applications_log.md`.
+6. Draft (never send) any outreach emails due this session into `applications_log.md`.
 
-## Running locally
+## Scoring rubric (weights)
 
-You need **Python 3.11+** and **Node 18+**.
+Family & financial stability **30%** · Research fit **25%** · India-return value **20%** ·
+Institution prestige **15%** · Permanence pathway **10%**. Weighted score = Σ(score × weight)/10.
 
-### 1. Backend (port 8000)
+## Standing rules
 
-```bash
-cd backend
-python3 -m venv .venv && source .venv/bin/activate   # optional but recommended
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
-```
-
-On first start it creates the SQLite database and seeds a demo researcher plus
-a handful of sample positions. Interactive API docs: http://127.0.0.1:8000/docs
-
-### 2. Frontend (port 5173)
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Open http://127.0.0.1:5173. The Vite dev server proxies `/api/*` to the backend
-on port 8000 (configurable via `VITE_API_TARGET`).
-
-## Configuration
-
-Copy the example env files and edit as needed:
-
-```bash
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
-```
-
-To run against Postgres instead of SQLite, set in `backend/.env`:
-
-```
-DATABASE_URL=postgresql+psycopg://user:password@localhost:5432/postdocengine
-```
-
-(and `pip install psycopg[binary]`).
-
-## API overview
-
-All routes are under `/api`:
-
-| Method | Path                                   | Purpose                                  |
-|--------|----------------------------------------|------------------------------------------|
-| GET/POST/PUT/DELETE | `/api/researchers[/{id}]` | Manage researcher profiles               |
-| GET/POST/PUT/DELETE | `/api/positions[/{id}]`   | Postdoc listings; `?q=`, `?field=`, `?location=` filters |
-| GET/POST/PUT/DELETE | `/api/applications[/{id}]`| Application pipeline; `?researcher_id=`, `?status=` |
-| GET/POST/PUT/DELETE | `/api/research[/{id}]`    | Research items                           |
-| GET    | `/api/recommendations/{researcher_id}` | Ranked matches for a researcher          |
-| GET    | `/api/meta/enums`                      | Allowed status/type values               |
-| GET    | `/api/health`                          | Health check                             |
-
-## How the match engine works
-
-`backend/app/matching.py` scores each position for a researcher in `[0, 1]` by
-combining:
-
-- **keyword-phrase overlap** between the researcher's interests and the
-  position's keywords (primary signal, and the human-readable "why"),
-- **token overlap** across the position's title/description/field (softer signal),
-- a **field-match bonus**, and
-- a small **open-deadline bonus**.
-
-It's a transparent heuristic — no external ML dependencies — so results are fast
-and explainable, and every recommendation comes with the matched keywords and a
-reason string.
-
-## Building for production
-
-```bash
-cd frontend && npm run build   # emits static assets to frontend/dist
-```
-
-Serve `frontend/dist` behind any static host and point it at the FastAPI
-backend (set `VITE_API_URL` at build time, or reverse-proxy `/api`).
+Nothing below 7.0 gets application time unless it is a strategic safety net · spouse
+work rights are never assumed (draft an HR query instead) · every application serves the
+India-return story · a portable fellowship beats a project position on ties · all
+submissions land 3–4 days before the deadline · Rona approves everything before it is sent.
