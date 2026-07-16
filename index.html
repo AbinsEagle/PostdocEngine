@@ -40,6 +40,7 @@
   .banner.warn{background:var(--amber-soft);color:var(--amber);border:1px solid #f3ddb0;}
   .banner.err{background:var(--red-soft);color:var(--red);border:1px solid #f3c9c9;}
   .live-badge{background:#fff3e0;color:#b5670a;border:1px solid #f4d9ad;border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:700;text-transform:uppercase;}
+  .sug-badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:700;text-transform:uppercase;}
   .about details{margin-top:8px;}
   .about summary{cursor:pointer;font-weight:600;color:var(--blue-dark);font-size:.85rem;}
   .about p{font-size:.83rem;color:#3a4658;margin:8px 0;line-height:1.55;}
@@ -335,7 +336,7 @@ function jobCard(j){
         <a class="jtitle" href="${j.link}" target="_blank" rel="noopener">${j.t}</a>
         <span class="save ${isSaved?"on":""}" data-save="${encodeURIComponent(j.t)}" title="Save">${isSaved?"★":"☆"}</span>
       </div>
-      <div class="jorg">${j.org} ${j.live ? '<span class="live-badge">live · unverified</span>' : ''}</div>
+      <div class="jorg">${j.org} ${j.live ? '<span class="live-badge">live · unverified</span>' : (j.suggested ? '<span class="sug-badge">ai · verify</span>' : '')}</div>
       <div class="metarow">
         ${rating}
         <span><span class="ic">📍</span>${j.loc||"Location N/A"}</span>
@@ -439,9 +440,11 @@ async function refresh(){
     } else {
       LIVE = (data.jobs || []).map(j => ({ ...j, tags: j.tags || [] }));
       renderFilters(); renderCards();
-      if (LIVE.length) showBanner("ok", "Found " + LIVE.length +
-        " live opening" + (LIVE.length===1?"":"s") + " (flagged live · unverified — verify before scoring).");
-      else showBanner("warn", "No new verifiable openings found this scan.");
+      const via = data.provider === "nvidia" ? "NVIDIA" : "Anthropic web-search";
+      const kind = data.provider === "nvidia" ? "ai-suggested targets to verify" : "live openings (unverified)";
+      if (LIVE.length) showBanner(data.provider === "nvidia" ? "warn" : "ok",
+        "Found " + LIVE.length + " " + kind + " via " + via + " — verify each before scoring.");
+      else showBanner("warn", "No results this scan (via " + via + ").");
     }
   } catch (e) {
     showBanner("err", "Refresh error: " + e + ". Showing the committed data.");
