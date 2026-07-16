@@ -1,0 +1,5 @@
+# Keep the working documents in git but OUT of the public deployment —
+# they contain personal context (family, finances, draft emails, referees).
+# Only index.html and api/ should be publicly served.
+*.md
+.gitignore
