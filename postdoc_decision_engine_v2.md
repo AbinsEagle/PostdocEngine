@@ -26,11 +26,11 @@ You are running Rona's 5-day postdoc scan. On every session:
 
 ## 1. Candidate snapshot
 
-- Final-year PhD, tropical meteorology: monsoon onset dynamics, BSISO/ISV, VHF radar, GRU-LSTM prediction. Thesis submission late 2026; postdoc start early-mid 2027.
-- First-author: Atmospheric Research (2023), URSI Radio Science Letters (2025); under review: Climate Dynamics (Arabian Sea cyclones); imminent: npj Climate & Atmospheric Science (BSISO-Rossby nonlinearity); in prep: Atmospheric Research (TEJ regimes). Co-author: Theor. Appl. Climatology 2025, Climate Dynamics 2025.
+- Final-year PhD, tropical meteorology, CUSAT (DST-INSPIRE SRF, IF190594; supervisor Dr. M. G. Manoj, ACARR). Thesis: "Dynamical Pathways and Interactions Governing the Indian Summer Monsoon Onset and Intraseasonal Variability" — monsoon onset dynamics, BSISO/ISV, VHF radar, GRU-LSTM prediction. Submission late 2026; postdoc start early-mid 2027.
+- First-author: Atmospheric Research (2023, diurnal monsoon winds across onset/active-break/withdrawal, doi:10.1016/j.atmosres.2023.107055); URSI Radio Science Letters (2025, radar-based dynamical index for tracking India's monsoon onset). Under review: Climate Dynamics 2026 (Arabian Sea cyclones aiding faster onset progression). Manuscript prepared: BSISO–Rossby nonlinear interaction & west-coast extreme rainfall (target: npj Climate & Atmospheric Science). In prep: TEJ structural regimes. Co-author: Theor. Appl. Climatology 2025, Climate Dynamics 2025.
 - Signature result: GRU-LSTM system predicted the 2026 Indian monsoon onset in real time, verified within one day of the IMD date (hindcast MAE 4.3 days, 2019-2026, zero false alarms).
-- Hands-on: world's first 205 MHz VHF ST wind-profiling radar (ACARR).
-- Awards: URSI AP-RASC 2025 Student Paper Prize (Sydney), CARE-25 Best Paper, AGU 2024 Travel Grant, DST-INSPIRE Fellowship, FERCC Fellowship (2026), ANRF Travel Grant (2026).
+- Hands-on: world's first 205 MHz VHF ST wind-profiling radar (ACARR), incl. radar signal processing and Rayleigh-scattering filtration from UVW wind components. Toolkit: Python (extensive); MATLAB, C++, NCL, GrADS, CDO, R (basic); WRF, LaTeX (basic).
+- Awards: URSI AP-RASC 2025 Top-3 Student Paper Prize ($500, Sydney), CARE-25 Best Paper, AGU 2024 Travel Grant ($1,000), DST-INSPIRE Fellowship (2021-26), FERCC Fellowship (2026), ANRF Travel Grant (2026); JAM qualified 2017. Member: EGU, AOGS. India network: INTROMET/IITM Pune, ICTS monsoon-dynamics workshops, RADMAP 2026; AOGS Fukuoka Aug 2026 upcoming.
 - End goal (6-8 yr): Scientist position in India (IITM / ISRO / NCMRWF); return route via Ramanujan / Ramalingaswami / INSPIRE Faculty.
 - Family: married (Abins, V-Guard Kerala); relocation decided per opportunity. Spouse visa WORK RIGHTS are a first-class criterion.
 
@@ -102,8 +102,14 @@ typos, ORCID in header, Research Highlights block (lead with 2026 onset verifica
 SRF achievement bullets, "First Class with Distinction" on both degrees, publications
 split first-author/co-author with DOIs, add FERCC + ANRF awards, referees reordered
 (Manoj → Sen Gupta → Shinto Mathew), photo toggle (photo for Japan, none for Europe),
-Python stack spelled out. Pending: Google Scholar profile creation; Sen Gupta referee
-confirmation email; compiled Europe + Japan PDF versions.
+Python stack spelled out.
+CV audit (16 Jul 2026, against the uploaded master CV): patch NOT yet applied —
+"Tropica Jet Streams" typo persists in Skills; no ORCID in header; no Research
+Highlights block; publications not split first-author/co-author (DOI present only on
+the 2023 Atmos. Res. entry); FERCC + ANRF absent from Awards; no "First Class with
+Distinction" on the degrees; referees still Manoj + Shinto Mathew only (Sen Gupta not
+yet added — confirmation email still pending). Also pending: Google Scholar profile;
+compiled Europe (no photo) + Japan (photo) PDF versions.
 
 ## 7. Standing decision rules
 
@@ -122,3 +128,8 @@ mobile check-ins only · Aug 12 follow-up emails + ANRF paperwork · Aug 17 MSCA
 Aug 22 MSCA revision · Aug 27 MSCA v2 + ETH host contact · Sep 1 ETH cycle + MSCA polish ·
 Sep 6 MSCA final · Sep 11 retro + Humboldt/CCRS/KAUST track · Sep 16-Oct 31 Humboldt,
 outreach, ANRF claim (courier by Oct 16), thesis balance.
+
+**Automated weekly scan (from 20 Jul 2026):** a Claude Code Routine runs every Monday
+9:00 IST — deadline audit + LOG/META refresh + UNVERIFIED lead surfacing (keyword search
+only), committed and pushed so the dashboard redeploys. Automated runs never score
+openings or append to the Section 5 shortlist; that always needs human verification.

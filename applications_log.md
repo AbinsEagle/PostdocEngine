@@ -133,3 +133,29 @@ Rona Maria Sunil
 **Actions pending Rona's approval:** fill the bracketed details (referee title,
 Birmingham PI name, contact block), then send drafts 1 and 3 today; hold draft 2
 until the CV is compiled. Verify ICTP portal status and decide go/no-go on C3S.
+
+## 16 Jul 2026 — CV sync + weekly automation (Claude Code)
+
+**CV audit (uploaded master CV vs the Section 6 tailoring patch):** patch not yet
+applied. Still open: "Tropica Jet Streams" typo (Skills); ORCID missing from header;
+no Research Highlights block; publications not split first-author/co-author (DOI only
+on Atmos. Res. 2023); FERCC + ANRF awards absent; no "First Class with Distinction";
+referees still Manoj + Shinto Mathew only — Sen Gupta not yet added (the 14 Jul
+confirmation draft still unsent). Google Scholar and compiled Europe/Japan PDFs also
+pending. The CV itself was deliberately NOT committed to the repo — it carries personal
+contact details, and the repo's files are publicly served by the Vercel deployment.
+
+**Spec updates:** Section 1 snapshot enriched with CV-verified facts (INSPIRE SRF
+IF190594, supervisor, thesis title, publication specifics + DOI, prize amounts
+$500/$1,000, EGU + AOGS memberships, toolkit, India conference network). Section 6
+"pending" list replaced with the concrete 16 Jul audit. Section 8 notes the new
+automation cadence.
+
+**Automation armed:** weekly Claude Code Routine, Mondays 9:00 IST. Standing rules for
+automated runs (approved by Abins, 16 Jul): deadline audit + LOG/META refresh +
+UNVERIFIED lead surfacing via keyword search only; never scores openings or appends to
+the Section 5 shortlist; commits and pushes so the dashboard redeploys.
+
+**Deadline flags (today 16 Jul):** ICTP ESP C3S closes 18 Jul (2 days) — the Rule-5
+target (14–15 Jul) has passed; final go/no-go needed immediately. MSCA-PF skeleton due
+23 Jul (7 days). Penn State 19 Jul and GFZ 22 Jul below threshold (not pursued).
