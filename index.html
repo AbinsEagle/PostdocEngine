@@ -29,6 +29,23 @@
   .searchbox .loc{flex:1;min-width:90px;border-left:1px solid var(--line);}
   .searchbox button{border:none;background:var(--blue);color:#fff;padding:0 26px;height:44px;font-size:.95rem;font-weight:700;cursor:pointer;border-radius:0 30px 30px 0;}
   .searchbox button:hover{background:var(--blue-dark);}
+  .refresh{border:1px solid #cfe0f7;background:#eaf1fc;color:var(--blue-dark);border-radius:22px;padding:9px 16px;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;}
+  .refresh:hover{background:#dbe8fb;}
+  .refresh:disabled{opacity:.6;cursor:default;}
+  .refresh.spin{animation:spin 1s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .banner{max-width:1240px;margin:12px auto 0;padding:10px 16px;border-radius:10px;font-size:.86rem;display:none;}
+  .banner.show{display:block;}
+  .banner.ok{background:var(--green-soft);color:var(--green);border:1px solid #bde8d4;}
+  .banner.warn{background:var(--amber-soft);color:var(--amber);border:1px solid #f3ddb0;}
+  .banner.err{background:var(--red-soft);color:var(--red);border:1px solid #f3c9c9;}
+  .live-badge{background:#fff3e0;color:#b5670a;border:1px solid #f4d9ad;border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:700;text-transform:uppercase;}
+  .about details{margin-top:8px;}
+  .about summary{cursor:pointer;font-weight:600;color:var(--blue-dark);font-size:.85rem;}
+  .about p{font-size:.83rem;color:#3a4658;margin:8px 0;line-height:1.55;}
+  .about ol{margin:8px 0 4px 18px;font-size:.82rem;color:#3a4658;}
+  .about li{margin-bottom:6px;line-height:1.5;}
+  .about b{color:var(--navy);}
   .whoami{font-size:.76rem;color:var(--muted);text-align:right;line-height:1.5;white-space:nowrap;}
   .whoami b{color:var(--ink);}
 
@@ -121,9 +138,12 @@
       <input id="loc" class="loc" placeholder="Location">
       <button id="searchBtn">Search</button>
     </div>
+    <button id="refreshBtn" class="refresh" title="Scan the boards for new openings now">↻ Refresh</button>
     <div class="whoami">Owner <b>Rona Maria Sunil</b><br>Last scan <b id="lastScan"></b> · Next <b id="nextScan"></b></div>
   </div>
 </header>
+
+<div id="banner" class="banner"></div>
 
 <div class="ribbon">
   <h1><b id="resCount"></b> postdoc openings &amp; leads</h1>
@@ -149,6 +169,26 @@
 
   <!-- Right rail -->
   <aside class="right">
+    <div class="panel about">
+      <h4>🎯 How this fits Rona</h4>
+      <p>This board is tuned to <b>one profile</b>, not a generic search. Every opening is scored on
+      what actually decides Rona's move: family finances and <b>spouse work rights</b> (30%), how well a
+      group's ISV/BSISO + radar + ML work matches her toolkit (25%), and how much the post's brand helps
+      a later <b>return to an Indian scientist role</b> (20%). Her signature result — a GRU-LSTM system that
+      called the 2026 monsoon onset in real time, verified within a day of the IMD date — is a day-one asset
+      for QPE, nowcasting, and intraseasonal-prediction groups, which is why radar/ML posts rank highest.</p>
+      <details>
+        <summary>Top-3% habits that actually land these posts</summary>
+        <ol>
+          <li><b>Email the PI before you apply.</b> The strongest candidates arrive already known — a short, specific note about the group's last two papers beats a cold application.</li>
+          <li><b>Bring your own money.</b> A portable fellowship (MSCA-PF, Humboldt) makes you cheap to host and lets you pick the lab — fellowship beats project on ties.</li>
+          <li><b>Submit 3–4 days early, never on deadline day.</b> Portals fail; referees go quiet. Slack in the schedule is a feature, not laziness.</li>
+          <li><b>Tailor one CV per region.</b> Photo for Japan, none for Europe; lead with the one verified, quantified result, not a wall of publications.</li>
+          <li><b>Line up referees in writing first.</b> Confirm each referee before you list them — a silent referee sinks an otherwise strong file.</li>
+          <li><b>Make every application serve one story.</b> Here, the India-return arc — so reviewers see a trajectory, not a scattershot.</li>
+        </ol>
+      </details>
+    </div>
     <div class="panel">
       <h4>⏰ Deadlines &amp; milestones</h4>
       <div id="miles"></div>
@@ -258,6 +298,7 @@ const initials = org => org.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/).slice(
 const SUBLABELS = ["Stability","Fit","India","Prestige","Perm"];
 
 let state = { tier:"all", q:"", loc:"" };
+let LIVE = []; // live, unverified openings pulled by the Refresh button
 const saved = new Set(JSON.parse(localStorage.getItem("pe_saved")||"[]"));
 
 function matchTier(j,f){
@@ -270,7 +311,7 @@ function matchTier(j,f){
 }
 function filtered(){
   const q = state.q.toLowerCase(), loc = state.loc.toLowerCase();
-  return JOBS
+  return [...LIVE, ...JOBS]
     .filter(j=>matchTier(j,state.tier))
     .filter(j=>!q || (j.t+j.org+j.loc+j.tags.join(" ")).toLowerCase().includes(q))
     .filter(j=>!loc || j.loc.toLowerCase().includes(loc))
@@ -294,7 +335,7 @@ function jobCard(j){
         <a class="jtitle" href="${j.link}" target="_blank" rel="noopener">${j.t}</a>
         <span class="save ${isSaved?"on":""}" data-save="${encodeURIComponent(j.t)}" title="Save">${isSaved?"★":"☆"}</span>
       </div>
-      <div class="jorg">${j.org}</div>
+      <div class="jorg">${j.org} ${j.live ? '<span class="live-badge">live · unverified</span>' : ''}</div>
       <div class="metarow">
         ${rating}
         <span><span class="ic">📍</span>${j.loc||"Location N/A"}</span>
@@ -375,6 +416,40 @@ function runSearch(){
 document.getElementById("searchBtn").addEventListener("click", runSearch);
 ["kw","loc"].forEach(id=>document.getElementById(id).addEventListener("keydown",e=>{ if(e.key==="Enter") runSearch(); }));
 document.getElementById("kw").addEventListener("input", ()=>{ state.q=document.getElementById("kw").value.trim(); renderCards(); });
+
+// ---- Refresh: pull live openings from the serverless scan endpoint ----
+function showBanner(kind, msg){
+  const b = document.getElementById("banner");
+  b.className = "banner show " + kind;
+  b.textContent = msg;
+}
+async function refresh(){
+  const btn = document.getElementById("refreshBtn");
+  btn.disabled = true; btn.classList.add("spin");
+  showBanner("warn", "Scanning the boards for new openings… this can take up to a minute.");
+  try {
+    const r = await fetch("/api/refresh", { method: "POST" });
+    const data = await r.json().catch(() => ({}));
+    if (r.status === 501) {
+      showBanner("warn", (data.message || "Live refresh isn't configured yet.") +
+        " Showing the committed data.");
+    } else if (!r.ok) {
+      showBanner("err", "Refresh failed (" + r.status + "). " + (data.message || data.error || "") +
+        " Showing the committed data.");
+    } else {
+      LIVE = (data.jobs || []).map(j => ({ ...j, tags: j.tags || [] }));
+      renderFilters(); renderCards();
+      if (LIVE.length) showBanner("ok", "Found " + LIVE.length +
+        " live opening" + (LIVE.length===1?"":"s") + " (flagged live · unverified — verify before scoring).");
+      else showBanner("warn", "No new verifiable openings found this scan.");
+    }
+  } catch (e) {
+    showBanner("err", "Refresh error: " + e + ". Showing the committed data.");
+  } finally {
+    btn.disabled = false; btn.classList.remove("spin");
+  }
+}
+document.getElementById("refreshBtn").addEventListener("click", refresh);
 
 renderSide(); renderFilters(); renderCards();
 </script>
