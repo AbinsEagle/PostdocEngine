@@ -11,7 +11,7 @@ approves everything before it leaves the machine.
 | File | Role |
 |------|------|
 | `postdoc_decision_engine_v2.md` | **The spec.** Candidate snapshot, scoring rubric (Section 2), financial map, deadlines, scored shortlist (Section 5), and the standing decision rules (Section 7). Section 0 is the operating procedure for each scan. |
-| `dashboard.html` | **The dashboard.** A self-contained page that renders openings, scores, live deadline countdowns, milestones, and the scan log. Only its `DATA BLOCK` (META, JOBS, MILESTONES, LOG arrays) is edited each run — the page computes everything else itself. Open it in any browser. |
+| `index.html` | **The dashboard.** A self-contained page (Naukri-style job portal) that renders openings, scores, live deadline countdowns, milestones, and the scan log. Named `index.html` so it serves at the site root on any static host with no config. Only its `DATA BLOCK` (META, JOBS, MILESTONES, LOG arrays) is edited each run — the page computes everything else itself. Open it in any browser. |
 | `applications_log.md` | **The log.** Append-only record of each scan: boards checked, openings scored, leads, discards, deadlines flagged, and drafted emails. |
 
 ## How a scan works (Section 0 summary)
@@ -20,7 +20,7 @@ approves everything before it leaves the machine.
 2. Browse EURAXESS, AGU Careers, Nature Careers, jobs.ac.uk, academicpositions.eu, and GEWEX for new openings matching: *monsoon, intraseasonal, BSISO, MJO, radar meteorology, QPE, precipitation, machine-learning weather, tropical convection*.
 3. Score each new opening 0–10 on every rubric criterion; compute the weighted score (threshold **≥ 7.0**).
 4. Check every Section 4 deadline against today; flag anything within 10 days.
-5. **Show Rona the results before editing any file.** After approval: append openings ≥ 7.0 to Section 5, update the `dashboard.html` data block, and log the run in `applications_log.md`.
+5. **Show Rona the results before editing any file.** After approval: append openings ≥ 7.0 to Section 5, update the `index.html` data block, and log the run in `applications_log.md`.
 6. Draft (never send) any outreach emails due this session into `applications_log.md`.
 
 ## Scoring rubric (weights)

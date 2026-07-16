@@ -18,7 +18,8 @@ You are running Rona's 5-day postdoc scan. On every session:
 4. Check every Section 4 deadline against today's date; flag anything within 10 days.
 5. Show Rona the results BEFORE editing this file. After approval, append openings
    scoring ≥ 7.0 to the Section 5 table and log actions in applications_log.md.
-   ALSO update dashboard.html on every run: edit only its DATA BLOCK (META, JOBS,
+   ALSO update index.html (the dashboard; served at the site root) on every run:
+   edit only its DATA BLOCK (META, JOBS,
    MILESTONES, LOG arrays) — the page renders itself and computes countdowns live.
 6. Draft (never send) any outreach emails due this session into applications_log.md.
    Email style: genuine, humble, concise, short sentences, no em dashes.
