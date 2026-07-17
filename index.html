@@ -47,6 +47,12 @@
   .about ol{margin:8px 0 4px 18px;font-size:.82rem;color:#3a4658;}
   .about li{margin-bottom:6px;line-height:1.5;}
   .about b{color:var(--navy);}
+  .fitlist{list-style:none;margin:10px 0 4px;padding:0;}
+  .fitlist li{font-size:.82rem;color:#3a4658;line-height:1.5;padding:9px 0;border-top:1px dashed var(--line);}
+  .fitlist li:first-child{border-top:none;}
+  .fitlist i{color:var(--blue-dark);font-style:normal;font-weight:600;}
+  .fitnote{font-size:.77rem;color:var(--muted);margin-top:6px;line-height:1.5;}
+  .apply.disabled{background:var(--chip);color:var(--muted);cursor:default;pointer-events:none;}
   .whoami{font-size:.76rem;color:var(--muted);text-align:right;line-height:1.5;white-space:nowrap;}
   .whoami b{color:var(--ink);}
 
@@ -204,16 +210,21 @@
   <!-- Right rail -->
   <aside class="right">
     <div class="panel about">
-      <h4>🎯 How this fits Rona</h4>
-      <p>This board is tuned to <b>one profile</b>, not a generic search. Every opening is scored on
-      what actually decides Rona's move: family finances and <b>spouse work rights</b> (30%), how well a
-      group's ISV/BSISO + radar + ML work matches her toolkit (25%), and how much the post's brand helps
-      a later <b>return to an Indian scientist role</b> (20%). Her signature result — a GRU-LSTM system that
-      called the 2026 monsoon onset in real time, verified within a day of the IMD date — is a day-one asset
-      for QPE, nowcasting, and intraseasonal-prediction groups, which is why radar/ML posts rank highest.
-      Proof points on file: <b>URSI AP-RASC 2025 Top-3 Student Paper Prize</b>, CARE-25 Best Paper,
-      an AGU 2024 travel grant, the DST-INSPIRE fellowship, and hands-on work on the world's first
-      205&nbsp;MHz VHF ST wind-profiling radar.</p>
+      <h4>🎯 How this fits me</h4>
+      <p>Openings are ranked by how well they match <b>my science</b>. Finances, spouse work rights and
+      permanence still weigh in the score, but they run <b>silently in the background</b> — this panel is only
+      about the expertise I bring and where I can contribute.</p>
+      <details open>
+        <summary>My expertise → what it matches → how I contribute</summary>
+        <ul class="fitlist">
+          <li><b>Monsoon onset &amp; intraseasonal (BSISO/ISV) dynamics.</b> <i>Matches</i> intraseasonal-prediction and monsoon-dynamics groups. <i>I bring</i> a published wind-profiler onset index (URSI RSL 2025) and BSISO–Rossby nonlinear-interaction analysis I can extend to new regions.</li>
+          <li><b>ML weather prediction (GRU-LSTM).</b> <i>Matches</i> ML-for-weather, nowcasting and QPE post-processing labs. <i>I bring</i> a real-time onset system that called the 2026 monsoon within a day of the IMD date (hindcast MAE 4.3 days, zero false alarms) — a deployable pipeline from day one.</li>
+          <li><b>VHF / ST radar meteorology.</b> <i>Matches</i> radar-observation and QPE groups. <i>I bring</i> hands-on work on the world's first 205&nbsp;MHz ST wind-profiling radar: signal processing, UVW winds, Rayleigh-scatter filtration.</li>
+          <li><b>Computational climate stack.</b> <i>Matches</i> modelling and data-heavy groups. <i>I bring</i> Python at scale plus WRF, CDO, GrADS, NCL — reproducible analysis on large datasets.</li>
+          <li><b>Tropical jet streams &amp; extreme rainfall.</b> <i>Matches</i> extremes / attribution work. <i>I bring</i> TEJ-regime and west-coast extreme-rainfall dynamics.</li>
+        </ul>
+        <p class="fitnote">Independence signals reviewers weigh: first-author papers with DOIs, URSI AP-RASC 2025 Top-3 prize, CARE-25 Best Paper, DST-INSPIRE fellowship.</p>
+      </details>
       <details>
         <summary>Top-3% habits that actually land these posts</summary>
         <ol>
@@ -365,12 +376,16 @@ function jobCard(j){
   const subs = j.s ? `<div class="subscores">${j.s.map((v,i)=>`<span>${SUBLABELS[i]} <b>${v}</b></span>`).join("")}</div>` : "";
   const tags = j.tags.map((t,i)=>`<span class="tag ${i<3?"skill":""}">${t}</span>`).join("");
   const isSaved = saved.has(j.t);
+  const link = (j.link || "").trim();
+  const titleHtml = link
+    ? `<a class="jtitle" href="${link}" target="_blank" rel="noopener noreferrer">${j.t}</a>`
+    : `<span class="jtitle">${j.t}</span>`;
   return `
   <div class="jcard ${cls}">
     <div class="logo-c" style="background:${logoColor(j.org)}">${initials(j.org)}</div>
     <div class="jbody">
       <div class="jtop">
-        <a class="jtitle" href="${j.link}" target="_blank" rel="noopener">${j.t}</a>
+        ${titleHtml}
         <span class="save ${isSaved?"on":""}" data-save="${encodeURIComponent(j.t)}" title="Save">${isSaved?"★":"☆"}</span>
       </div>
       <div class="jorg">${j.org} ${j.live ? '<span class="live-badge">live · unverified</span>' : (j.suggested ? '<span class="sug-badge">ai · verify</span>' : '')}</div>
@@ -383,7 +398,9 @@ function jobCard(j){
       <div class="tags">${tags}</div>
       <div class="jfoot">
         <span class="status ${urgent?"urgent":""}"><span class="dot"></span>${j.status}</span>
-        <a class="apply" href="${j.link}" target="_blank" rel="noopener">View / Apply</a>
+        ${link
+          ? `<a class="apply" href="${link}" target="_blank" rel="noopener noreferrer">View / Apply ↗</a>`
+          : `<span class="apply disabled" title="No direct link yet">No link</span>`}
       </div>
     </div>
   </div>`;
