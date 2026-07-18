@@ -55,7 +55,9 @@ const SHAPE = `each object exactly:
 {"t": title, "org": institution, "loc": country, "score": weighted number,
  "s": [stability,fit,india,prestige,perm], "status": short note,
  "tier": "shortlist" if score>=7 else "watch", "deadline": "YYYY-MM-DD" or null,
- "link": URL, "tags": [3-6 short keywords]}`;
+ "link": URL, "tags": [3-6 short keywords],
+ "why": one sentence on why Rona's science (monsoon/ISV/BSISO, ML prediction, VHF radar/QPE) fits this role,
+ "perk": one sentence on what is in it for her (career/skills/India-return value)}`;
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST" && req.method !== "GET") {
@@ -187,6 +189,7 @@ function normalize(j, extra) {
     status: j.status || "", tier: j.tier || "watch",
     deadline: "deadline" in extra ? extra.deadline : (j.deadline || null),
     link: j.link || "", tags: Array.isArray(j.tags) ? j.tags : [],
+    fit: j.why || j.fit || "", perk: j.perk || "",
     live: !!extra.live, suggested: !!extra.suggested,
   };
 }
