@@ -3,261 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PostdocEngine — Postdoc Job Portal</title>
+<meta name="theme-color" content="#ffffff">
+<title>PostdocEngine</title>
 <style>
   :root{
-    --blue:#2b6fd6;--blue-dark:#1c4fa3;--blue-soft:#eaf1fc;
-    --navy:#172b46;--ink:#1d2939;--muted:#667085;--line:#e4e7ec;
-    --bg:#f3f5fa;--card:#ffffff;
-    --green:#12915b;--green-soft:#e5f5ee;--amber:#c77700;--amber-soft:#fdf1dd;
-    --red:#d64545;--red-soft:#fdecec;--chip:#f1f4f9;--star:#f5a623;
-    --shadow:0 1px 3px rgba(23,43,70,.08);--radius:12px;
+    --accent:#2563eb;--accent-ink:#1d4ed8;
+    --ink:#111827;--body:#374151;--muted:#8a929e;--faint:#aab1bd;
+    --line:#ecedf0;--line-soft:#f2f3f5;
+    --bg:#ffffff;--panel:#fafbfc;
+    --good:#0f7a4f;--good-bg:#eaf6f0;
+    --warn:#b26a00;--warn-bg:#fbf1e0;
+    --urgent:#c23b3b;--urgent-bg:#fbecec;
+    --star:#eab308;--radius:14px;
   }
-  *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;}
-  body{background:var(--bg);color:var(--ink);font-size:14px;overflow-x:hidden;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
   a{color:inherit;text-decoration:none;}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px;}
 
-  /* ---------- Header / hero search (Naukri style) ---------- */
-  header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:var(--shadow);}
-  .hbar{max-width:1240px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
-  .logo{font-size:1.5rem;font-weight:800;color:var(--blue);letter-spacing:-.5px;white-space:nowrap;}
-  .logo span{color:var(--navy);}
-  .logo small{display:block;font-size:.62rem;font-weight:600;color:var(--muted);letter-spacing:.3px;margin-top:-2px;}
-  .searchbox{flex:1;min-width:280px;display:flex;align-items:center;background:#fff;border:1px solid #d3dbe8;border-radius:30px;box-shadow:0 1px 6px rgba(23,43,70,.06);overflow:hidden;}
-  .searchbox input{border:none;outline:none;padding:12px 16px;font-size:.92rem;background:transparent;}
-  .searchbox .kw{flex:2;min-width:120px;}
-  .searchbox .loc{flex:1;min-width:90px;border-left:1px solid var(--line);}
-  .searchbox button{border:none;background:var(--blue);color:#fff;padding:0 26px;height:44px;font-size:.95rem;font-weight:700;cursor:pointer;border-radius:0 30px 30px 0;}
-  .searchbox button:hover{background:var(--blue-dark);}
-  .refresh{border:1px solid #cfe0f7;background:#eaf1fc;color:var(--blue-dark);border-radius:22px;padding:9px 16px;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;}
-  .refresh:hover{background:#dbe8fb;}
-  .refresh:disabled{opacity:.6;cursor:default;}
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);
+    backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);}
+  .hbar{max-width:680px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+  .brand{font-size:1.2rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);}
+  .brand span{color:var(--accent);}
+  .refresh{border:1px solid var(--line);background:#fff;color:var(--body);
+    border-radius:20px;width:38px;height:38px;font-size:1rem;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0;}
+  .refresh:hover{border-color:var(--accent);color:var(--accent);}
+  .refresh:disabled{opacity:.5;cursor:default;}
   .refresh.spin{animation:spin 1s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
-  .banner{max-width:1240px;margin:12px auto 0;padding:10px 16px;border-radius:10px;font-size:.86rem;display:none;}
+
+  /* ---------- Search + filters ---------- */
+  .tools{padding-top:22px;}
+  .search{display:flex;gap:10px;}
+  .search input{flex:1;min-width:0;border:1px solid var(--line);background:var(--panel);
+    border-radius:12px;padding:13px 15px;font:inherit;font-size:.95rem;color:var(--ink);outline:none;transition:.15s;}
+  .search input::placeholder{color:var(--faint);}
+  .search input:focus{border-color:var(--accent);background:#fff;}
+  .search select{border:1px solid var(--line);background:var(--panel);border-radius:12px;
+    padding:13px 14px;font:inherit;font-size:.9rem;color:var(--body);outline:none;cursor:pointer;max-width:42%;}
+  .search select:focus{border-color:var(--accent);}
+
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px;
+    scrollbar-width:none;-ms-overflow-style:none;margin:0 -20px;padding-left:20px;padding-right:20px;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--body);
+    border-radius:20px;padding:8px 15px;font-size:.85rem;font-weight:500;cursor:pointer;transition:.12s;}
+  .chip:hover{border-color:var(--faint);}
+  .chip.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+  .chip .n{opacity:.55;margin-left:5px;font-variant-numeric:tabular-nums;}
+
+  .status-line{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    padding:16px 2px 4px;font-size:.8rem;color:var(--muted);}
+  .status-line b{color:var(--body);font-weight:600;}
+
+  /* ---------- Banner ---------- */
+  .banner{display:none;margin:12px 0 0;padding:11px 14px;border-radius:11px;font-size:.85rem;line-height:1.45;}
   .banner.show{display:block;}
-  .banner.ok{background:var(--green-soft);color:var(--green);border:1px solid #bde8d4;}
-  .banner.warn{background:var(--amber-soft);color:var(--amber);border:1px solid #f3ddb0;}
-  .banner.err{background:var(--red-soft);color:var(--red);border:1px solid #f3c9c9;}
-  .live-badge{background:#fff3e0;color:#b5670a;border:1px solid #f4d9ad;border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:700;text-transform:uppercase;}
-  .sug-badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;border-radius:6px;padding:2px 8px;font-size:.7rem;font-weight:700;text-transform:uppercase;}
-  .about details{margin-top:8px;}
-  .about summary{cursor:pointer;font-weight:600;color:var(--blue-dark);font-size:.85rem;}
-  .about p{font-size:.83rem;color:#3a4658;margin:8px 0;line-height:1.55;}
-  .about ol{margin:8px 0 4px 18px;font-size:.82rem;color:#3a4658;}
-  .about li{margin-bottom:6px;line-height:1.5;}
-  .about b{color:var(--navy);}
-  .fitlist{list-style:none;margin:10px 0 4px;padding:0;}
-  .fitlist li{font-size:.82rem;color:#3a4658;line-height:1.5;padding:9px 0;border-top:1px dashed var(--line);}
-  .fitlist li:first-child{border-top:none;}
-  .fitlist i{color:var(--blue-dark);font-style:normal;font-weight:600;}
-  .fitnote{font-size:.77rem;color:var(--muted);margin-top:6px;line-height:1.5;}
-  .apply.disabled{background:var(--chip);color:var(--muted);cursor:default;pointer-events:none;}
-  .whoami{font-size:.76rem;color:var(--muted);text-align:right;line-height:1.5;white-space:nowrap;}
-  .whoami b{color:var(--ink);}
+  .banner.ok{background:var(--good-bg);color:var(--good);}
+  .banner.warn{background:var(--warn-bg);color:var(--warn);}
+  .banner.err{background:var(--urgent-bg);color:var(--urgent);}
 
-  /* ---------- Results ribbon ---------- */
-  .ribbon{max-width:1240px;margin:18px auto 0;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
-  .ribbon h1{font-size:1.15rem;font-weight:700;}
-  .ribbon h1 b{color:var(--blue);}
-  .chips{display:flex;gap:10px;flex-wrap:wrap;}
-  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:7px 14px;font-size:.78rem;color:var(--muted);box-shadow:var(--shadow);}
-  .kpi b{font-size:1.05rem;color:var(--ink);margin-right:5px;}
-  .kpi.green b{color:var(--green);} .kpi.red b{color:var(--red);}
+  /* ---------- Cards ---------- */
+  .cards{display:flex;flex-direction:column;gap:12px;padding:12px 0 8px;}
+  .card{border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:border-color .15s;position:relative;}
+  .card:hover{border-color:var(--faint);}
+  .card.hot{border-left:3px solid var(--urgent);}
+  .card.good{border-left:3px solid var(--good);}
+  .card.submitted{border-left:3px solid var(--accent);}
+  .card.lead{border-left:3px solid var(--faint);}
 
-  /* ---------- Layout ---------- */
-  main{max-width:1240px;margin:16px auto 40px;padding:0 20px;display:grid;grid-template-columns:230px 1fr 300px;gap:18px;align-items:start;}
-
-  /* ---------- Responsive: single column below 1024px, nothing hidden ---------- */
-  @media(max-width:1024px){
-    main{display:flex;flex-direction:column;gap:16px;}
-    aside.left,aside.right,section.cards{width:100%;}
-    aside.left{order:1;position:static;}  /* filters up top */
-    section.cards{order:2;}                /* then jobs */
-    aside.right{order:3;}                  /* how-it-fits + deadlines + maps last */
-    /* turn the tall filter lists into compact wrapping chip clouds */
-    aside.left{display:flex;gap:14px;flex-wrap:wrap;}
-    .filter{flex:1 1 260px;margin-bottom:0;}
-    #tierFilters,#locFilters{display:flex;flex-wrap:wrap;gap:8px;padding:12px;}
-    .filter .opt{border-left:none;border:1px solid var(--line);border-radius:20px;padding:6px 12px;}
-    .filter .opt.active{border-color:var(--blue);}
-  }
-
-  /* ---------- Phones ---------- */
-  @media(max-width:620px){
-    .hbar{padding:10px 14px;gap:10px;}
-    .logo{font-size:1.25rem;}
-    .logo small{font-size:.55rem;}
-    .refresh{order:1;}
-    .searchbox{order:2;flex-basis:100%;min-width:0;}
-    .whoami{order:3;flex-basis:100%;text-align:left;white-space:normal;}
-    .ribbon{padding:0 14px;margin-top:14px;}
-    .ribbon h1{font-size:1.05rem;}
-    .kpi{padding:6px 11px;font-size:.74rem;}
-    main{padding:0 14px;}
-    footer{padding:0 14px 30px;}
-    .jcard{padding:14px;gap:12px;}
-    .logo-c{width:44px;height:44px;font-size:1.05rem;border-radius:9px;}
-    .jtitle{font-size:1rem;}
-    .jfoot .apply{padding:8px 16px;}
-    .metarow{gap:10px;}
-  }
-
-  /* ---------- Left filter rail ---------- */
-  aside.left{position:sticky;top:84px;}
-  .filter{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;}
-  .filter h4{font-size:.82rem;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);padding:13px 16px;border-bottom:1px solid var(--line);}
-  .filter .opt{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;cursor:pointer;font-size:.9rem;border-left:3px solid transparent;}
-  .filter .opt:hover{background:#f7f9fc;}
-  .filter .opt.active{background:var(--blue-soft);border-left-color:var(--blue);color:var(--blue-dark);font-weight:700;}
-  .filter .opt .cnt{background:var(--chip);color:var(--muted);border-radius:12px;padding:1px 9px;font-size:.72rem;font-weight:600;}
-  .filter .opt.active .cnt{background:#fff;color:var(--blue);}
-  .clearloc{padding:9px 16px;font-size:.78rem;color:var(--blue);cursor:pointer;display:none;}
-  .clearloc.show{display:block;}
-
-  /* ---------- Job cards (Naukri style) ---------- */
-  .cards{display:flex;flex-direction:column;gap:14px;}
-  .jcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;display:flex;gap:16px;transition:box-shadow .15s,transform .15s;position:relative;}
-  .jcard:hover{box-shadow:0 6px 18px rgba(23,43,70,.12);transform:translateY(-1px);}
-  .jcard.hot{border-left:4px solid var(--red);}
-  .jcard.good{border-left:4px solid var(--green);}
-  .jcard.submitted{border-left:4px solid var(--blue);}
-  .jcard.lead{border-left:4px solid #a4abb8;}
-  .logo-c{width:52px;height:52px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.25rem;color:#fff;}
-  .jbody{flex:1;min-width:0;}
-  .jtop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-  .jtitle{font-size:1.06rem;font-weight:700;color:var(--navy);line-height:1.35;}
-  .jcard:hover .jtitle{color:var(--blue);}
-  .save{color:#c4ccd8;font-size:1.15rem;cursor:pointer;line-height:1;flex-shrink:0;}
+  .c-top{display:flex;align-items:flex-start;gap:12px;}
+  .c-title{flex:1;min-width:0;font-size:1.02rem;font-weight:650;line-height:1.35;color:var(--ink);letter-spacing:-.01em;}
+  a.c-title:hover{color:var(--accent);}
+  .save{color:var(--faint);font-size:1.25rem;line-height:1;cursor:pointer;flex-shrink:0;padding:0 2px;transition:.12s;}
+  .save:hover{color:var(--star);}
   .save.on{color:var(--star);}
-  .jorg{color:var(--muted);font-size:.9rem;margin:3px 0 8px;}
-  .metarow{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:.83rem;color:var(--muted);margin-bottom:10px;}
-  .metarow .ic{color:#98a2b3;margin-right:4px;}
-  .rating{display:inline-flex;align-items:center;gap:5px;background:var(--green-soft);color:var(--green);font-weight:800;border-radius:8px;padding:3px 9px;font-size:.82rem;}
-  .rating.fail{background:var(--amber-soft);color:var(--amber);}
-  .rating.lead{background:var(--chip);color:var(--muted);}
-  .rating .star{color:var(--star);}
-  .subscores{display:flex;gap:12px;flex-wrap:wrap;font-size:.74rem;color:var(--muted);margin-bottom:10px;}
-  .subscores b{color:var(--ink);font-weight:700;}
-  .tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;}
-  .tag{background:var(--chip);color:#48566b;border-radius:6px;padding:3px 10px;font-size:.76rem;font-weight:500;}
-  .tag.skill{background:var(--blue-soft);color:var(--blue-dark);}
-  .jfit{margin:0 0 12px;background:#f7faff;border:1px solid #e3edfb;border-radius:9px;padding:0 12px;}
-  .jfit summary{cursor:pointer;font-size:.82rem;font-weight:700;color:var(--blue-dark);padding:9px 0;list-style:none;}
-  .jfit summary::-webkit-details-marker{display:none;}
-  .jfit summary::before{content:"✦ ";}
-  .jfit[open] summary{border-bottom:1px dashed #d7e4f6;}
-  .jfit .fitrow{font-size:.82rem;color:#3a4658;line-height:1.55;padding:8px 0;}
-  .jfit .fitrow b{color:var(--navy);}
-  .jfit .fitrow:first-of-type{padding-top:10px;}
-  .jfit .fitrow:last-of-type{padding-bottom:11px;}
-  .jfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:10px;}
-  .status{font-size:.8rem;color:#48566b;}
-  .status .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--muted);margin-right:6px;}
-  .status.urgent{color:var(--red);font-weight:600;} .status.urgent .dot{background:var(--red);}
-  .apply{background:var(--blue);color:#fff;border-radius:8px;padding:9px 22px;font-weight:700;font-size:.85rem;cursor:pointer;white-space:nowrap;}
-  .apply:hover{background:var(--blue-dark);}
-  .dchip{border-radius:14px;padding:2px 10px;font-size:.74rem;font-weight:700;}
-  .dchip.red{background:var(--red-soft);color:var(--red);} .dchip.amber{background:var(--amber-soft);color:var(--amber);}
-  .dchip.green{background:var(--green-soft);color:var(--green);} .dchip.grey{background:var(--chip);color:var(--muted);}
-  .empty{background:#fff;border:1px dashed var(--line);border-radius:var(--radius);padding:40px;text-align:center;color:var(--muted);}
+  .c-org{font-size:.86rem;color:var(--muted);margin-top:5px;}
 
-  /* ---------- Right rail ---------- */
-  aside.right .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:15px 17px;margin-bottom:16px;}
-  aside.right h4{font-size:.9rem;margin-bottom:11px;color:var(--navy);}
-  .mile{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.82rem;}
-  .mile:last-child{border-bottom:none;}
-  .dleft{font-weight:700;white-space:nowrap;}
-  .dleft.red{color:var(--red);} .dleft.amber{color:var(--amber);} .dleft.ok{color:var(--green);}
-  .rubric span{display:inline-block;margin:2px 5px 2px 0;font-size:.76rem;background:var(--chip);border-radius:12px;padding:3px 10px;}
-  table{width:100%;border-collapse:collapse;font-size:.78rem;}
-  th,td{text-align:left;padding:5px 6px;border-bottom:1px solid #f0f2f6;}
+  .c-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;}
+  .score{display:inline-flex;align-items:center;gap:4px;font-weight:700;font-size:.82rem;
+    background:var(--good-bg);color:var(--good);border-radius:8px;padding:4px 9px;}
+  .score.mid{background:var(--panel);color:var(--body);}
+  .score.lead{background:var(--panel);color:var(--muted);font-weight:600;}
+  .score .s{color:var(--star);}
+  .dchip{border-radius:8px;padding:4px 9px;font-size:.78rem;font-weight:600;}
+  .dchip.red{background:var(--urgent-bg);color:var(--urgent);}
+  .dchip.amber{background:var(--warn-bg);color:var(--warn);}
+  .dchip.green{background:var(--good-bg);color:var(--good);}
+  .dchip.grey{background:var(--panel);color:var(--muted);}
+  .rolling{font-size:.78rem;color:var(--muted);}
+  .flag{border-radius:8px;padding:4px 9px;font-size:.72rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase;}
+  .flag.live{background:#fff3e0;color:#b5670a;}
+  .flag.sug{background:#eef2ff;color:#3730a3;}
+
+  /* expandable detail */
+  .more{margin-top:14px;border-top:1px solid var(--line-soft);}
+  .more summary{list-style:none;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--accent-ink);
+    padding-top:12px;display:flex;align-items:center;gap:6px;}
+  .more summary::-webkit-details-marker{display:none;}
+  .more summary .caret{transition:transform .2s;font-size:.7rem;color:var(--faint);}
+  .more[open] summary .caret{transform:rotate(90deg);}
+  .more-body{padding-top:4px;}
+  .fitrow{font-size:.88rem;color:var(--body);line-height:1.55;padding:9px 0;}
+  .fitrow b{color:var(--ink);font-weight:650;}
+  .subs{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.76rem;color:var(--muted);padding:9px 0 4px;}
+  .subs b{color:var(--body);font-weight:700;}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:8px 0 2px;}
+  .tag{font-size:.74rem;color:var(--muted);background:var(--panel);border-radius:6px;padding:3px 9px;}
+  .c-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:12px;}
+  .st{font-size:.8rem;color:var(--muted);}
+  .st.urgent{color:var(--urgent);font-weight:600;}
+  .apply{font-size:.83rem;font-weight:650;color:var(--accent);white-space:nowrap;}
+  .apply.disabled{color:var(--faint);}
+
+  .empty{border:1px dashed var(--line);border-radius:var(--radius);padding:44px 20px;text-align:center;color:var(--muted);}
+  .empty b{color:var(--body);}
+
+  /* ---------- Reference sections ---------- */
+  .ref{border-top:1px solid var(--line);}
+  .ref summary{list-style:none;cursor:pointer;padding:18px 2px;font-size:.95rem;font-weight:600;color:var(--ink);
+    display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .ref summary::-webkit-details-marker{display:none;}
+  .ref summary .caret{color:var(--faint);font-size:.8rem;transition:transform .2s;}
+  .ref[open] summary .caret{transform:rotate(90deg);}
+  .ref-body{padding:0 2px 22px;font-size:.88rem;color:var(--body);line-height:1.6;}
+  .ref-body p{margin:0 0 12px;}
+  .ref-body b{color:var(--ink);}
+  .fitlist{list-style:none;margin:6px 0;}
+  .fitlist li{padding:11px 0;border-top:1px solid var(--line-soft);font-size:.86rem;line-height:1.55;}
+  .fitlist li:first-child{border-top:none;}
+  .fitlist i{font-style:normal;font-weight:650;color:var(--accent-ink);}
+  .fitnote{font-size:.8rem;color:var(--muted);margin-top:8px;}
+  .habits{margin:6px 0 0 18px;}
+  .habits li{margin-bottom:9px;font-size:.86rem;line-height:1.5;}
+  .habits b{color:var(--ink);}
+  .mile{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:.85rem;}
+  .mile:first-child{border-top:none;}
+  .dleft{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .dleft.red{color:var(--urgent);} .dleft.amber{color:var(--warn);} .dleft.ok{color:var(--good);} .dleft.past{color:var(--faint);}
+  .rubric{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+  .rubric span{font-size:.78rem;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:5px 11px;color:var(--body);}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line-soft);}
   th{color:var(--muted);font-weight:600;}
-  .log li{font-size:.8rem;margin:0 0 9px 15px;color:#3a4658;line-height:1.5;}
-  footer{max-width:1240px;margin:0 auto;padding:0 20px 34px;font-size:.78rem;color:var(--muted);}
+  td:first-child{color:var(--ink);}
+  .log{list-style:none;}
+  .log li{padding:11px 0;border-top:1px solid var(--line-soft);font-size:.83rem;line-height:1.55;color:var(--body);}
+  .log li:first-child{border-top:none;}
+
+  footer{max-width:680px;margin:0 auto;padding:22px 20px 40px;font-size:.78rem;color:var(--faint);line-height:1.6;border-top:1px solid var(--line);}
+
+  @media(max-width:480px){
+    .wrap{padding:0 16px;}
+    .hbar{padding:12px 16px;}
+    footer{padding:20px 16px 36px;}
+    body{font-size:14px;}
+    .card{padding:16px;}
+    .search select{max-width:38%;}
+    .chips{margin:0 -16px;padding-left:16px;padding-right:16px;}
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="hbar">
-    <div class="logo">Postdoc<span>Engine</span><small>RESEARCH CAREERS PORTAL</small></div>
-    <div class="searchbox">
-      <input id="kw" class="kw" placeholder="Skills, keyword, institute (e.g. monsoon, radar, ML)">
-      <input id="loc" class="loc" placeholder="Location">
-      <button id="searchBtn">Search</button>
-    </div>
-    <button id="refreshBtn" class="refresh" title="Scan the boards for new openings now">↻ Refresh</button>
-    <div class="whoami">Owner <b>Rona Maria Sunil</b><br>Last scan <b id="lastScan"></b> · Next <b id="nextScan"></b></div>
+    <div class="brand">Postdoc<span>Engine</span></div>
+    <button id="refreshBtn" class="refresh" title="Scan the boards for new openings now">↻</button>
   </div>
 </header>
 
-<div id="banner" class="banner"></div>
-
-<div class="ribbon">
-  <h1><b id="resCount"></b> postdoc openings &amp; leads</h1>
-  <div class="chips" id="kpis"></div>
-</div>
-
-<main>
-  <!-- Left filters -->
-  <aside class="left">
-    <div class="filter">
-      <h4>Status</h4>
-      <div id="tierFilters"></div>
+<div class="wrap">
+  <div class="tools">
+    <div class="search">
+      <input id="kw" placeholder="Search — monsoon, radar, ML…">
+      <select id="locSel"><option value="">All locations</option></select>
     </div>
-    <div class="filter">
-      <h4>Location</h4>
-      <div id="locFilters"></div>
-      <div class="clearloc" id="clearLoc">✕ Clear location</div>
+    <div class="chips" id="chips"></div>
+    <div class="status-line">
+      <span><b id="resCount">0</b> openings &amp; leads</span>
+      <span>scan <b id="lastScan"></b> · next <b id="nextScan"></b></span>
     </div>
-  </aside>
+    <div id="banner" class="banner"></div>
+  </div>
 
-  <!-- Job cards -->
   <section class="cards" id="cards"></section>
 
-  <!-- Right rail -->
-  <aside class="right">
-    <div class="panel about">
-      <h4>🎯 How this fits me</h4>
+  <details class="ref">
+    <summary>🎯 How this fits me <span class="caret">▸</span></summary>
+    <div class="ref-body">
       <p>Openings are ranked by how well they match <b>my science</b>. Finances, spouse work rights and
-      permanence still weigh in the score, but they run <b>silently in the background</b> — this panel is only
-      about the expertise I bring and where I can contribute.</p>
-      <details open>
-        <summary>My expertise → what it matches → how I contribute</summary>
-        <ul class="fitlist">
-          <li><b>Monsoon onset &amp; intraseasonal (BSISO/ISV) dynamics.</b> <i>Matches</i> intraseasonal-prediction and monsoon-dynamics groups. <i>I bring</i> a published wind-profiler onset index (URSI RSL 2025) and BSISO–Rossby nonlinear-interaction analysis I can extend to new regions.</li>
-          <li><b>ML weather prediction (GRU-LSTM).</b> <i>Matches</i> ML-for-weather, nowcasting and QPE post-processing labs. <i>I bring</i> a real-time onset system that called the 2026 monsoon within a day of the IMD date (hindcast MAE 4.3 days, zero false alarms) — a deployable pipeline from day one.</li>
-          <li><b>VHF / ST radar meteorology.</b> <i>Matches</i> radar-observation and QPE groups. <i>I bring</i> hands-on work on the world's first 205&nbsp;MHz ST wind-profiling radar: signal processing, UVW winds, Rayleigh-scatter filtration.</li>
-          <li><b>Computational climate stack.</b> <i>Matches</i> modelling and data-heavy groups. <i>I bring</i> Python at scale plus WRF, CDO, GrADS, NCL — reproducible analysis on large datasets.</li>
-          <li><b>Tropical jet streams &amp; extreme rainfall.</b> <i>Matches</i> extremes / attribution work. <i>I bring</i> TEJ-regime and west-coast extreme-rainfall dynamics.</li>
-        </ul>
-        <p class="fitnote">Independence signals reviewers weigh: first-author papers with DOIs, URSI AP-RASC 2025 Top-3 prize, CARE-25 Best Paper, DST-INSPIRE fellowship.</p>
-      </details>
-      <details>
-        <summary>Top-3% habits that actually land these posts</summary>
-        <ol>
-          <li><b>Email the PI before you apply.</b> The strongest candidates arrive already known — a short, specific note about the group's last two papers beats a cold application.</li>
-          <li><b>Bring your own money.</b> A portable fellowship (MSCA-PF, Humboldt) makes you cheap to host and lets you pick the lab — fellowship beats project on ties.</li>
-          <li><b>Submit 3–4 days early, never on deadline day.</b> Portals fail; referees go quiet. Slack in the schedule is a feature, not laziness.</li>
-          <li><b>Tailor one CV per region.</b> Photo for Japan, none for Europe; lead with the one verified, quantified result, not a wall of publications.</li>
-          <li><b>Line up referees in writing first.</b> Confirm each referee before you list them — a silent referee sinks an otherwise strong file.</li>
-          <li><b>Make every application serve one story.</b> Here, the India-return arc — so reviewers see a trajectory, not a scattershot.</li>
-        </ol>
-      </details>
+      permanence still weigh in the score, but they run <b>silently in the background</b> — this is only about
+      the expertise I bring and where I can contribute.</p>
+      <ul class="fitlist">
+        <li><b>Monsoon onset &amp; intraseasonal (BSISO/ISV) dynamics.</b> <i>Matches</i> intraseasonal-prediction and monsoon-dynamics groups. <i>I bring</i> a published wind-profiler onset index (URSI RSL 2025) and BSISO–Rossby nonlinear-interaction analysis I can extend to new regions.</li>
+        <li><b>ML weather prediction (GRU-LSTM).</b> <i>Matches</i> ML-for-weather, nowcasting and QPE post-processing labs. <i>I bring</i> a real-time onset system that called the 2026 monsoon within a day of the IMD date (hindcast MAE 4.3 days, zero false alarms).</li>
+        <li><b>VHF / ST radar meteorology.</b> <i>Matches</i> radar-observation and QPE groups. <i>I bring</i> hands-on work on the world's first 205&nbsp;MHz ST wind-profiling radar: signal processing, UVW winds, Rayleigh-scatter filtration.</li>
+        <li><b>Computational climate stack.</b> <i>Matches</i> modelling and data-heavy groups. <i>I bring</i> Python at scale plus WRF, CDO, GrADS, NCL — reproducible analysis on large datasets.</li>
+        <li><b>Tropical jet streams &amp; extreme rainfall.</b> <i>Matches</i> extremes / attribution work. <i>I bring</i> TEJ-regime and west-coast extreme-rainfall dynamics.</li>
+      </ul>
+      <p class="fitnote">Independence signals reviewers weigh: first-author papers with DOIs, URSI AP-RASC 2025 Top-3 prize, CARE-25 Best Paper, DST-INSPIRE fellowship.</p>
     </div>
-    <div class="panel">
-      <h4>⏰ Deadlines &amp; milestones</h4>
-      <div id="miles"></div>
+  </details>
+
+  <details class="ref">
+    <summary>✎ Habits that land these posts <span class="caret">▸</span></summary>
+    <div class="ref-body">
+      <ol class="habits">
+        <li><b>Email the PI before you apply.</b> The strongest candidates arrive already known — a short, specific note about the group's last two papers beats a cold application.</li>
+        <li><b>Bring your own money.</b> A portable fellowship (MSCA-PF, Humboldt) makes you cheap to host and lets you pick the lab — fellowship beats project on ties.</li>
+        <li><b>Submit 3–4 days early, never on deadline day.</b> Portals fail; referees go quiet. Slack in the schedule is a feature, not laziness.</li>
+        <li><b>Tailor one CV per region.</b> Photo for Japan, none for Europe; lead with the one verified, quantified result.</li>
+        <li><b>Line up referees in writing first.</b> A silent referee sinks an otherwise strong file.</li>
+        <li><b>Make every application serve one story</b> — the India-return arc — so reviewers see a trajectory, not scattershot.</li>
+      </ol>
     </div>
-    <div class="panel">
-      <h4>📏 Scoring rubric — shortlist ≥ 7.0</h4>
+  </details>
+
+  <details class="ref">
+    <summary>⏰ Deadlines &amp; milestones <span class="caret">▸</span></summary>
+    <div class="ref-body"><div id="miles"></div></div>
+  </details>
+
+  <details class="ref">
+    <summary>📏 Scoring &amp; financial reality <span class="caret">▸</span></summary>
+    <div class="ref-body">
       <div class="rubric">
         <span>Family &amp; financial 30%</span><span>Research fit 25%</span><span>India-return 20%</span><span>Prestige 15%</span><span>Permanence 10%</span>
       </div>
-    </div>
-    <div class="panel">
-      <h4>💰 Financial reality map</h4>
       <table>
         <tr><th>Venue</th><th>Savings/yr</th><th>Spouse work</th></tr>
         <tr><td>KAUST</td><td>₹35–50 L</td><td>Dependent visa</td></tr>
@@ -272,14 +253,15 @@
         <tr><td>USA</td><td>₹10–20 L</td><td>J-2 EAD</td></tr>
       </table>
     </div>
-    <div class="panel">
-      <h4>📜 Scan log</h4>
-      <ul class="log" id="log"></ul>
-    </div>
-  </aside>
-</main>
+  </details>
 
-<footer>Standing rules: nothing &lt;7.0 gets application time unless strategic · spouse work rights never assumed · every application serves the India-return story · fellowship beats project on ties · submit 3–4 days before deadline · Rona approves everything before it leaves the machine.</footer>
+  <details class="ref">
+    <summary>📜 Scan log <span class="caret">▸</span></summary>
+    <div class="ref-body"><ul class="log" id="log"></ul></div>
+  </details>
+</div>
+
+<footer>Owner Rona Maria Sunil. Standing rules: nothing &lt;7.0 gets application time unless strategic · spouse work rights never assumed · every application serves the India-return story · fellowship beats project on ties · submit 3–4 days before deadline · Rona approves everything before it leaves the machine.</footer>
 
 <script>
 /* ============================================================
@@ -342,19 +324,16 @@ const dChip = d => { if(d==null) return "";
   const n = days(d), dt = new Date(d).toLocaleDateString('en-GB',{day:'numeric',month:'short'});
   if(n < 0) return `<span class="dchip grey">closed ${dt}</span>`;
   const cls = n<=7?"red":n<=15?"amber":"green";
-  return `<span class="dchip ${cls}">⏳ ${n} day${n===1?"":"s"} left · ${dt}</span>`; };
+  return `<span class="dchip ${cls}">${n} day${n===1?"":"s"} left · ${dt}</span>`; };
 
 const TIERS = [
-  {f:"all",     label:"All openings"},
+  {f:"all",     label:"All"},
   {f:"shortlist",label:"Shortlist ≥ 7.0"},
-  {f:"urgent",  label:"Urgent deadlines"},
-  {f:"submitted",label:"Submitted / in progress"},
-  {f:"watch",   label:"Watch (< 7.0)"},
-  {f:"lead",    label:"Leads & hosts"},
+  {f:"urgent",  label:"Urgent"},
+  {f:"submitted",label:"In progress"},
+  {f:"watch",   label:"Watch"},
+  {f:"lead",    label:"Leads"},
 ];
-const LOGO_COLORS = ["#2b6fd6","#7b53c9","#12915b","#c77700","#d64545","#0d9aa8","#5a6b8c","#b0409a"];
-const logoColor = s => LOGO_COLORS[[...s].reduce((a,c)=>a+c.charCodeAt(0),0) % LOGO_COLORS.length];
-const initials = org => org.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase() || "PD";
 const SUBLABELS = ["Stability","Fit","India","Prestige","Perm"];
 
 let state = { tier:"all", q:"", loc:"" };
@@ -381,47 +360,48 @@ function filtered(){
 function jobCard(j){
   const urgent = j.deadline && days(j.deadline)>=0 && days(j.deadline)<=7;
   const cls = j.tier==="submitted"?"submitted":(j.tier==="lead"?"lead":(j.score>=7?(urgent?"hot":"good"):(urgent?"hot":"")));
-  const rating = j.score!=null
-    ? `<span class="rating ${j.score>=7?"":"fail"}"><span class="star">★</span> ${j.score.toFixed(2)} match</span>`
-    : `<span class="rating lead">Lead — not scored</span>`;
-  const subs = j.s ? `<div class="subscores">${j.s.map((v,i)=>`<span>${SUBLABELS[i]} <b>${v}</b></span>`).join("")}</div>` : "";
-  const tags = j.tags.map((t,i)=>`<span class="tag ${i<3?"skill":""}">${t}</span>`).join("");
+  const score = j.score!=null
+    ? `<span class="score ${j.score>=7?"":"mid"}"><span class="s">★</span> ${j.score.toFixed(2)}</span>`
+    : `<span class="score lead">Lead</span>`;
+  const dl = j.deadline ? dChip(j.deadline) : `<span class="rolling">Rolling / open</span>`;
+  const flag = j.live ? '<span class="flag live">live</span>' : (j.suggested ? '<span class="flag sug">verify</span>' : '');
   const isSaved = saved.has(j.t);
   const link = (j.link || "").trim();
   const titleHtml = link
-    ? `<a class="jtitle" href="${link}" target="_blank" rel="noopener noreferrer">${j.t}</a>`
-    : `<span class="jtitle">${j.t}</span>`;
-  const fitHtml = (j.fit || j.perk)
-    ? `<details class="jfit">
-        <summary>Why this fits me</summary>
-        ${j.fit ? `<div class="fitrow"><b>My match:</b> ${j.fit}</div>` : ""}
-        ${j.perk ? `<div class="fitrow"><b>In it for me:</b> ${j.perk}</div>` : ""}
-      </details>`
-    : "";
+    ? `<a class="c-title" href="${link}" target="_blank" rel="noopener noreferrer">${j.t}</a>`
+    : `<span class="c-title">${j.t}</span>`;
+  const subs = j.s ? `<div class="subs">${j.s.map((v,i)=>`<span>${SUBLABELS[i]} <b>${v}</b></span>`).join("")}</div>` : "";
+  const tags = j.tags.length ? `<div class="tags">${j.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>` : "";
   return `
-  <div class="jcard ${cls}">
-    <div class="logo-c" style="background:${logoColor(j.org)}">${initials(j.org)}</div>
-    <div class="jbody">
-      <div class="jtop">
+  <div class="card ${cls}">
+    <div class="c-top">
+      <div style="flex:1;min-width:0">
         ${titleHtml}
-        <span class="save ${isSaved?"on":""}" data-save="${encodeURIComponent(j.t)}" title="Save">${isSaved?"★":"☆"}</span>
+        <div class="c-org">${j.org}</div>
       </div>
-      <div class="jorg">${j.org} ${j.live ? '<span class="live-badge">live · unverified</span>' : (j.suggested ? '<span class="sug-badge">ai · verify</span>' : '')}</div>
-      <div class="metarow">
-        ${rating}
-        <span><span class="ic">📍</span>${j.loc||"Location N/A"}</span>
-        ${j.deadline?`<span>${dChip(j.deadline)}</span>`:`<span><span class="ic">🕓</span>Rolling / open</span>`}
-      </div>
-      ${subs}
-      <div class="tags">${tags}</div>
-      ${fitHtml}
-      <div class="jfoot">
-        <span class="status ${urgent?"urgent":""}"><span class="dot"></span>${j.status}</span>
-        ${link
-          ? `<a class="apply" href="${link}" target="_blank" rel="noopener noreferrer">View / Apply ↗</a>`
-          : `<span class="apply disabled" title="No direct link yet">No link</span>`}
-      </div>
+      <span class="save ${isSaved?"on":""}" data-save="${encodeURIComponent(j.t)}" title="Save">${isSaved?"★":"☆"}</span>
     </div>
+    <div class="c-meta">
+      ${score}
+      <span class="rolling">${j.loc||"Location N/A"}</span>
+      ${dl}
+      ${flag}
+    </div>
+    <details class="more">
+      <summary><span class="caret">▸</span> Why this fits me</summary>
+      <div class="more-body">
+        ${j.fit ? `<div class="fitrow"><b>My match.</b> ${j.fit}</div>` : ""}
+        ${j.perk ? `<div class="fitrow"><b>In it for me.</b> ${j.perk}</div>` : ""}
+        ${subs}
+        ${tags}
+        <div class="c-foot">
+          <span class="st ${urgent?"urgent":""}">${j.status}</span>
+          ${link
+            ? `<a class="apply" href="${link}" target="_blank" rel="noopener noreferrer">View / Apply ↗</a>`
+            : `<span class="apply disabled">No link yet</span>`}
+        </div>
+      </div>
+    </details>
   </div>`;
 }
 
@@ -429,10 +409,10 @@ function renderCards(){
   const list = filtered();
   const el = document.getElementById("cards");
   el.innerHTML = list.length ? list.map(jobCard).join("")
-    : `<div class="empty"><b>No matches</b><br>Try another status filter or clear your search.</div>`;
+    : `<div class="empty"><b>No matches</b><br>Try another filter or clear your search.</div>`;
   document.getElementById("resCount").textContent = list.length;
-  // wire save buttons
-  el.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",()=>{
+  el.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",e=>{
+    e.preventDefault(); e.stopPropagation();
     const key = decodeURIComponent(b.dataset.save);
     saved.has(key)?saved.delete(key):saved.add(key);
     localStorage.setItem("pe_saved", JSON.stringify([...saved]));
@@ -440,56 +420,37 @@ function renderCards(){
   }));
 }
 
-function renderFilters(){
-  // status tiers with counts
-  document.getElementById("tierFilters").innerHTML = TIERS.map(t=>{
+function renderChips(){
+  document.getElementById("chips").innerHTML = TIERS.map(t=>{
     const n = JOBS.filter(j=>matchTier(j,t.f)).length;
-    return `<div class="opt ${state.tier===t.f?"active":""}" data-tier="${t.f}">${t.label}<span class="cnt">${n}</span></div>`;
+    return `<div class="chip ${state.tier===t.f?"active":""}" data-tier="${t.f}">${t.label}<span class="n">${n}</span></div>`;
   }).join("");
   document.querySelectorAll("[data-tier]").forEach(o=>o.addEventListener("click",()=>{
-    state.tier=o.dataset.tier; renderFilters(); renderCards();
+    state.tier=o.dataset.tier; renderChips(); renderCards();
   }));
-  // location facet with counts
+}
+
+function renderLocations(){
   const locs = {};
   JOBS.forEach(j=>{ locs[j.loc]=(locs[j.loc]||0)+1; });
-  document.getElementById("locFilters").innerHTML = Object.entries(locs).sort((a,b)=>b[1]-a[1])
-    .map(([loc,n])=>`<div class="opt ${state.loc.toLowerCase()===loc.toLowerCase()?"active":""}" data-loc="${loc}">${loc}<span class="cnt">${n}</span></div>`).join("");
-  document.querySelectorAll("[data-loc]").forEach(o=>o.addEventListener("click",()=>{
-    state.loc = (state.loc.toLowerCase()===o.dataset.loc.toLowerCase())?"":o.dataset.loc;
-    document.getElementById("loc").value = state.loc;
-    document.getElementById("clearLoc").classList.toggle("show", !!state.loc);
-    renderFilters(); renderCards();
-  }));
-  document.getElementById("clearLoc").classList.toggle("show", !!state.loc);
+  const sel = document.getElementById("locSel");
+  const opts = Object.entries(locs).sort((a,b)=>b[1]-a[1])
+    .map(([loc,n])=>`<option value="${loc}"${state.loc.toLowerCase()===loc.toLowerCase()?" selected":""}>${loc} (${n})</option>`).join("");
+  sel.innerHTML = `<option value="">All locations</option>` + opts;
 }
 
 function renderSide(){
   document.getElementById("lastScan").textContent = META.lastScan;
-  document.getElementById("nextScan").textContent = META.nextScan;
-  const above = JOBS.filter(j=>j.score>=7).length;
-  const urgent = JOBS.filter(j=>j.deadline && days(j.deadline)>=0 && days(j.deadline)<=7).length;
-  const nextD = MILESTONES.map(m=>days(m.d)).filter(n=>n>=0).sort((a,b)=>a-b)[0];
-  document.getElementById("kpis").innerHTML = `
-    <div class="kpi"><b>${JOBS.length}</b>tracked</div>
-    <div class="kpi green"><b>${above}</b>shortlisted ≥7.0</div>
-    <div class="kpi red"><b>${urgent}</b>within 7 days</div>
-    <div class="kpi"><b>${nextD??"—"}</b>days to next milestone</div>`;
+  document.getElementById("nextScan").textContent = (META.nextScan||"").split(" (")[0];
   document.getElementById("miles").innerHTML = MILESTONES.map(m=>{
-    const n = days(m.d); const cls = n<0?"":"dleft "+(n<=7?"red":n<=15?"amber":"ok");
+    const n = days(m.d); const cls = n<0?"dleft past":"dleft "+(n<=7?"red":n<=15?"amber":"ok");
     return `<div class="mile"><span>${m.t}</span><span class="${cls}">${n<0?"past":n+"d"}</span></div>`;}).join("");
   document.getElementById("log").innerHTML = LOG.map(l=>`<li>${l}</li>`).join("");
 }
 
 // search wiring
-function runSearch(){
-  state.q = document.getElementById("kw").value.trim();
-  state.loc = document.getElementById("loc").value.trim();
-  document.getElementById("clearLoc").classList.toggle("show", !!state.loc);
-  renderFilters(); renderCards();
-}
-document.getElementById("searchBtn").addEventListener("click", runSearch);
-["kw","loc"].forEach(id=>document.getElementById(id).addEventListener("keydown",e=>{ if(e.key==="Enter") runSearch(); }));
 document.getElementById("kw").addEventListener("input", ()=>{ state.q=document.getElementById("kw").value.trim(); renderCards(); });
+document.getElementById("locSel").addEventListener("change", e=>{ state.loc=e.target.value; renderCards(); });
 
 // ---- Refresh: pull live openings from the serverless scan endpoint ----
 function showBanner(kind, msg){
@@ -505,14 +466,12 @@ async function refresh(){
     const r = await fetch("/api/refresh", { method: "POST" });
     const data = await r.json().catch(() => ({}));
     if (r.status === 501) {
-      showBanner("warn", (data.message || "Live refresh isn't configured yet.") +
-        " Showing the committed data.");
+      showBanner("warn", (data.message || "Live refresh isn't configured yet.") + " Showing the committed data.");
     } else if (!r.ok) {
-      showBanner("err", "Refresh failed (" + r.status + "). " + (data.message || data.error || "") +
-        " Showing the committed data.");
+      showBanner("err", "Refresh failed (" + r.status + "). " + (data.message || data.error || "") + " Showing the committed data.");
     } else {
       LIVE = (data.jobs || []).map(j => ({ ...j, tags: j.tags || [] }));
-      renderFilters(); renderCards();
+      renderChips(); renderCards();
       const via = data.provider === "nvidia" ? "NVIDIA" : "Anthropic web-search";
       const kind = data.provider === "nvidia" ? "ai-suggested targets to verify" : "live openings (unverified)";
       if (LIVE.length) showBanner(data.provider === "nvidia" ? "warn" : "ok",
@@ -527,7 +486,7 @@ async function refresh(){
 }
 document.getElementById("refreshBtn").addEventListener("click", refresh);
 
-renderSide(); renderFilters(); renderCards();
+renderSide(); renderChips(); renderLocations(); renderCards();
 </script>
 </body>
 </html>
