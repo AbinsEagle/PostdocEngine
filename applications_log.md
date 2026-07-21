@@ -159,3 +159,31 @@ the Section 5 shortlist; commits and pushes so the dashboard redeploys.
 **Deadline flags (today 16 Jul):** ICTP ESP C3S closes 18 Jul (2 days) — the Rule-5
 target (14–15 Jul) has passed; final go/no-go needed immediately. MSCA-PF skeleton due
 23 Jul (7 days). Penn State 19 Jul and GFZ 22 Jul below threshold (not pursued).
+
+## 21 Jul 2026 — data refresh (Claude Code)
+
+**State advanced against today (21 Jul):** ICTP ESP C3S and CLOSER (18 Jul) and Penn
+State EESI (19 Jul) have **closed** — statuses updated on the dashboard; kept in the
+list as history, none were submitted. GFZ GenAI4Earth closes 22 Jul (below threshold).
+Live/actionable now: **MSCA-PF skeleton due 23 Jul (2 days)**, KIT/HITS decision ~26 Jul
+(closes 30 Jul), Gothenburg submit target 28 Jul (closes 31 Jul), AOGS Fukuoka 1–7 Aug.
+
+**New lead (UNVERIFIED):** *UChicago — Project Cirrus* (Profs. Hassanzadeh, Shaw, Jina;
+Boos at UC Berkeley) — AI weather forecasting for the tropics / S2S, explicitly built on
+their Indian-monsoon-onset AI that was disseminated to ~38M farmers via India's Ministry
+of Agriculture. ~9/10 fit for the profile. The advertised cohort reviewed on a rolling
+basis **until 15 Jan 2026 (start before 1 Mar 2026)** — that window has passed, so it is a
+**watch / speculative-outreach** target for the next round, not a live application. Added
+to Section 5 as a lead only (score null); NOT scored or shortlisted.
+
+**Also surfaced, parked as generic leads to verify:** a 2-yr postdoc on Asian-summer-
+monsoon extreme precipitation over the Tibetan Plateau (WRF); ECMWF ML-weather roles;
+a EURAXESS "machine learning for climate predictions" post. No citable live deadlines
+captured — verify on portal before scoring.
+
+**Method note:** WebFetch to job boards remains blocked by this environment's egress
+policy, so this refresh used WebSearch only. Per standing rules, no opening was scored or
+appended to the Section 5 shortlist; leads are flagged UNVERIFIED with their URLs.
+
+**Still pending from prior runs:** ICTP was not submitted (window closed); Sen Gupta
+referee confirmation, the CV tailoring patch, and Google Scholar remain open.
