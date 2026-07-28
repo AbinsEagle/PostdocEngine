@@ -187,3 +187,22 @@ appended to the Section 5 shortlist; leads are flagged UNVERIFIED with their URL
 
 **Still pending from prior runs:** ICTP was not submitted (window closed); Sen Gupta
 referee confirmation, the CV tailoring patch, and Google Scholar remain open.
+
+## 28 Jul 2026 — weekly scan (Claude Code + research subagent)
+
+**Deadline audit (today 28 Jul):**
+- MSCA-PF skeleton (due 23 Jul) has **passed** — status advanced to "skeleton done, drafting toward the 10 Sep submit."
+- KIT/HITS ML calibration 6.65 — **closes 30 Jul (2 days)**; the "decide by 26 Jul" note is stale, so this is the final safety-net decision point now.
+- Gothenburg PAR 2026/530 6.45 — **submit target is TODAY (28 Jul)**; portal closes 31 Jul (Rule 5: land it today, not on the 31st).
+- ETH Zurich (host contact by 27 Aug / cycle ~1 Sep) and MSCA-PF (submit ~10 Sep) remain the next live deliverables.
+- ICTP C3S & CLOSER (18 Jul), Penn State (19 Jul), GFZ (22 Jul) remain **closed** — kept as history, none submitted.
+- Next scan after **AOGS Fukuoka 1–7 Aug** (JSPS host scouting there); META.nextScan set to 2026-08-04.
+
+**Live board sweep (research subagent, WebSearch only — WebFetch still egress-blocked, so all UNVERIFIED):**
+- **Added as leads (score null, not shortlisted):**
+  - *Argonne National Laboratory — ML for Weather & Climate (Stormer → S2S)* — strong fit (S2S + ML weather + calibrated ensembles ↔ her GRU-LSTM/S2S profile). Careers portal: https://argonne.wd1.myworkdayjobs.com/en-US/Argonne_Careers — verify openness + deadline (spouse work = J-2 EAD; confirm monsoon relevance).
+  - *National University of Singapore — Research Fellow, ML for Hydro-Meteorology* — medium/strong (physics-informed ML for convective rainfall, tropical, strong spouse work rights). https://careers.nus.edu.sg/ — verify openness + deadline.
+- **Noted, not added:** Oxford "Predictability of Weather & Climate" group (potential S2S host — https://www.physics.ox.ac.uk/research/group/predictability-weather-and-climate/current-job-vacancies, no live ad visible); Argonne Convective Storms / Land-atmosphere extremes (medium/weak); an ICTP "Climate Dynamics / Ocean-Atmosphere" listing distinct from the closed ESP posts (no confirmable open deadline).
+- **Tracked items — no change confirmable:** UChicago Project Cirrus still listed (no new cohort/deadline visible); Birmingham/WCSSP-India — no fresh vacancy this week.
+
+**Method note:** subagent ran 8 WebSearches across EURAXESS/jobs.ac.uk/AGU/Nature/GEWEX/academicpositions; titles+snippets+URLs only, no posting pages openable. Per standing rules nothing was scored or appended to the Section 5 shortlist; leads flagged UNVERIFIED with their URLs for manual verification.
