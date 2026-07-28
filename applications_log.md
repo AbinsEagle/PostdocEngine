@@ -206,3 +206,16 @@ referee confirmation, the CV tailoring patch, and Google Scholar remain open.
 - **Tracked items — no change confirmable:** UChicago Project Cirrus still listed (no new cohort/deadline visible); Birmingham/WCSSP-India — no fresh vacancy this week.
 
 **Method note:** subagent ran 8 WebSearches across EURAXESS/jobs.ac.uk/AGU/Nature/GEWEX/academicpositions; titles+snippets+URLs only, no posting pages openable. Per standing rules nothing was scored or appended to the Section 5 shortlist; leads flagged UNVERIFIED with their URLs for manual verification.
+
+### Live "Refresh" run — done internally (28 Jul)
+
+**Why internal:** the dashboard's Refresh button POSTs to `/api/refresh`, which returns **501 (not_configured)** until an `ANTHROPIC_API_KEY` or `NVIDIA_API_KEY` is set in the Vercel project. I also cannot call the live endpoint from this session — the agent proxy denies CONNECT to `postdoc-engine.vercel.app` (403), and there is no API key in this environment to run `api/refresh.js` locally (verified: the handler correctly returns the 501 fallback). So I ran the scan the button *would* run, myself, via WebSearch.
+
+**New currently-open find (added as a lead):**
+- *NTU Ocean Center, National Taiwan University (Taiwan)* — "Postdoctoral Research (or Higher-Level) Opportunity in Data Assimilation and AI-enhanced S2S forecast", with the Central Weather Administration, on the in-house GEPSv3 coupled ocean–atmosphere system. **Open until filled.** Apply: email CV + publication list to Prof. Yu-heng Tseng (tsengyh@ntu.edu.tw), subject "Postdoc Application-DA & AI S2S forecast". Listing: https://www.egu.eu/jobs/7871/ — **strong fit** (AI S2S / DA ↔ her ML-onset + MJO/BSISO work). Confirmed across two independent search results; spouse work rights unverified → Rule 2 before outreach.
+
+**Seen, not added:** MIT/Caltech CliMA postdoc (GPU climate model, Julia — ocean component, weak fit); UW College of the Environment "ML for Extreme Weather Events" (medium); Oxford "Predictability of Weather & Climate" vacancies (medium, potential host); the recurring Tibetan-Plateau monsoon-extreme-precip WRF post (no citable deadline).
+
+**Re-confirmed closed:** ICTP ESP C3S (18 Jul); TU Delft EuRadCA (30 Jun, already submitted); UChicago Project Cirrus (rolling to 1 Jan 2026).
+
+**To make the on-site button live:** set `ANTHROPIC_API_KEY` (best — its web_search runs on Anthropic's infra, which this env's proxy actually allows) or a free `NVIDIA_API_KEY` (inference-only → returns groups to verify) in Vercel → Settings → Environment Variables, then redeploy. WebFetch to job boards remains blocked here, so all leads stay UNVERIFIED until opened on their portals.
