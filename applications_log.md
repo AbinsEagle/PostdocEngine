@@ -219,3 +219,15 @@ referee confirmation, the CV tailoring patch, and Google Scholar remain open.
 **Re-confirmed closed:** ICTP ESP C3S (18 Jul); TU Delft EuRadCA (30 Jun, already submitted); UChicago Project Cirrus (rolling to 1 Jan 2026).
 
 **To make the on-site button live:** set `ANTHROPIC_API_KEY` (best — its web_search runs on Anthropic's infra, which this env's proxy actually allows) or a free `NVIDIA_API_KEY` (inference-only → returns groups to verify) in Vercel → Settings → Environment Variables, then redeploy. WebFetch to job boards remains blocked here, so all leads stay UNVERIFIED until opened on their portals.
+
+## 10 Aug 2026 — data update (Claude Code)
+
+**Board re-synced to today (10 Aug); prior updates had drifted on a stale 28 Jul anchor — corrected.**
+
+**Deadline audit (today 10 Aug):**
+- KIT/HITS 6.65 — **closed 30 Jul**; safety net lapsed, not pursued.
+- Gothenburg PAR 2026/530 6.45 — **closed 31 Jul**; marked submitted.
+- AOGS Fukuoka (1–7 Aug) — **past**; JSPS host scouting done there.
+- Live deliverables now: ETH Zurich (host contact by 27 Aug, closes 1 Sep); MSCA-PF (submit ~6 Sep, closes 10 Sep); Exeter NATALIE closes 20 Aug (10 days — below threshold, not pursued).
+
+**WebSearch sweep:** no new scored openings. Re-confirmed the open leads — NTU Ocean Center S2S (still open until filled); UChicago now also lists a second "AI weather forecasting across scales" (CeTD / Hassanzadeh) S2S call at https://geosci.uchicago.edu/postdoctoral-scholar-ai-weather-forecasting-across-scales/ alongside the closed Project Cirrus cohort — noted on the Cirrus lead. Re-confirmed closed: ICTP ESP C3S/CLOSER (18 Jul). WebFetch still egress-blocked; leads remain UNVERIFIED. META.nextScan → 17 Aug.
