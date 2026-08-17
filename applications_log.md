@@ -86,9 +86,14 @@ Rona Maria Sunil
 
 **Draft 2 — Birmingham HEPPI-ML PI (speculative outreach)**
 
+*Named contacts found 17 Aug 2026: Dr. Martin Widmann (m.widmann@bham.ac.uk) and
+Dr. Nadezhda Mamontova (n.mamontova@bham.ac.uk), listed on the HEPPI-ML posting
+(jobs.ac.uk DQU681). This was the placeholder blocking this draft — ready to send
+to either or both once Rona picks a name.*
+
 Subject: Postdoc collaboration on monsoon precipitation post-processing with ML
 
-Dear Dr [surname],
+Dear Dr Widmann / Dr Mamontova,
 
 I am writing with interest in the HEPPI-ML work on heavy precipitation forecast
 post-processing over India within WCSSP India. My PhD research is a close match to
@@ -231,3 +236,29 @@ referee confirmation, the CV tailoring patch, and Google Scholar remain open.
 - Live deliverables now: ETH Zurich (host contact by 27 Aug, closes 1 Sep); MSCA-PF (submit ~6 Sep, closes 10 Sep); Exeter NATALIE closes 20 Aug (10 days — below threshold, not pursued).
 
 **WebSearch sweep:** no new scored openings. Re-confirmed the open leads — NTU Ocean Center S2S (still open until filled); UChicago now also lists a second "AI weather forecasting across scales" (CeTD / Hassanzadeh) S2S call at https://geosci.uchicago.edu/postdoctoral-scholar-ai-weather-forecasting-across-scales/ alongside the closed Project Cirrus cohort — noted on the Cirrus lead. Re-confirmed closed: ICTP ESP C3S/CLOSER (18 Jul). WebFetch still egress-blocked; leads remain UNVERIFIED. META.nextScan → 17 Aug.
+
+## 17 Aug 2026 — weekly scan (Claude Code)
+
+**Deadline audit (today 17 Aug):** Exeter NATALIE now closes in 3 days (20 Aug) —
+still below threshold, not pursued. ETH host contact due in 10 days (27 Aug).
+MSCA-PF submit target ~6 Sep (closes 10 Sep) remains the next live deliverable.
+
+**Notable find:** the Birmingham HEPPI-ML posting is indexed again on jobs.ac.uk
+(job IDs DQT515 / DQU681), but the listing references a Nov/Dec 2025 start date —
+this is the same already-expired ad re-surfacing in search, **not** a fresh
+reopening. It did surface two named PI contacts for the first time: **Dr. Martin
+Widmann** (m.widmann@bham.ac.uk) and **Dr. Nadezhda Mamontova**
+(n.mamontova@bham.ac.uk). Draft 2 above has been updated with these names —
+this was the one placeholder blocking it since 14 Jul. Dashboard entry link
+updated from the generic jobs.ac.uk homepage to the specific listing.
+
+**Seen, not added:** Univ. of Leeds ML-for-agroclimatic-adaptation (off-core —
+agriculture, not monsoon/radar); Oxford AUSPICE postdoc (deadline passed 5 Jan
+2026); Alan Turing Institute "AI for Weather Forecasting" Research Lead / Theme
+Lead (senior/PI-level roles, closed 31 May — not postdoc-level).
+
+**Method note:** WebSearch only; WebFetch to job boards remains blocked. No
+opening scored or added to the Section 5 shortlist. META.nextScan → 24 Aug.
+
+**Action ready for Rona's approval:** send Draft 2 to Dr. Widmann and/or
+Dr. Mamontova now that both names are confirmed.
