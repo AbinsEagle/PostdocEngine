@@ -262,3 +262,22 @@ opening scored or added to the Section 5 shortlist. META.nextScan → 24 Aug.
 
 **Action ready for Rona's approval:** send Draft 2 to Dr. Widmann and/or
 Dr. Mamontova now that both names are confirmed.
+
+## 10 Sep 2026 — outcome update (Rona)
+
+**MSCA-PF @ TU Delft** — portal closed today (10 Sep) **without submission.** Moved
+from shortlist to watch, status "Not submitted."
+
+**ETH Zurich Postdoctoral Fellowship** — portal closed 1 Sep **without submission**
+(host contact/application did not go in). Moved from shortlist to watch, status
+"Not submitted."
+
+**JSPS Postdoctoral Fellowship — submitted ✔** Moved from watch to submitted.
+This is the strongest instrument-continuity story on the board (MU radar / Kyoto
+RISH sister to ACARR's VHF ST radar) and it's now a live application.
+
+Net for this cycle: 2 of 3 live deliverables (MSCA-PF, ETH) lapsed; JSPS is in.
+Remaining live shortlist items: CCRS Singapore, TU Delft EuRadCA (submitted),
+ICTP (closed, history), Gothenburg (submitted). Leads (Birmingham HEPPI-ML,
+UChicago Cirrus, MPI-M Incubator, Kyoto RISH, IAP-CAS, Argonne, NUS, NTU) remain
+open contact targets.
