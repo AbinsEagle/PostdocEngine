@@ -281,3 +281,37 @@ Remaining live shortlist items: CCRS Singapore, TU Delft EuRadCA (submitted),
 ICTP (closed, history), Gothenburg (submitted). Leads (Birmingham HEPPI-ML,
 UChicago Cirrus, MPI-M Incubator, Kyoto RISH, IAP-CAS, Argonne, NUS, NTU) remain
 open contact targets.
+
+## 15 Sep 2026 — China consultancy flyer follow-up (Claude Code)
+
+Rona shared a flyer from **"MP Consultant"** (WhatsApp +92 300 7519970, Gmail
+contact, run by Muhammad Perwaiz) advertising "China PhD & Postdoc 2026/27 —
+Fully Funded Opportunities," listing CSC, CAS-ANSO, UCAS, USTC (all PhD-level,
+not relevant), and Shuimu Tsinghua, Peking Univ. postdoc recruitment, CAS
+Institute postdoc, CAS PIFI, Westlake postdoc, Fudan postdoc.
+
+**Caution flagged to Rona:** this is a third-party lead-generation flyer, not
+an official source. None of its claims (program names, "active intake" badge,
+"updated 13 Sep 2026" stamp) were taken at face value — every named program was
+checked against its own institutional page instead. **No fee or consultancy is
+needed for any legitimate route here** — CSC, CAS-ANSO, PIFI, and every
+university's own postdoc recruitment all have free, official application
+portals. There's no reason to pay an intermediary to "assist with profile
+evaluation / supervisor outreach" for programs that are publicly documented.
+
+**What verified as real and useful:** **CAS PIFI** (President's International
+Fellowship Initiative) — ¥200,000/yr pre-tax stipend, 1–2 years, hosted at any
+CAS institute including IAP. Applications are reviewed year-round in batches,
+but **PIFI does not accept direct applications** — a CAS host researcher must
+apply on the candidate's behalf. This is now folded into the existing IAP-CAS
+Beijing lead (Prof. Lin Wang) as its named funding mechanism: the PI-contact
+step (already flagged, still pending Rule 2 spouse-visa confirmation) is the
+actual bottleneck for this route, not a formality.
+
+**Checked, not added:** Shuimu Tsinghua Scholar Program, Peking University
+postdoctoral recruitment, generic CAS Institute postdoctoral positions, Westlake
+University postdoctoral fellowships, Fudan University postdoctoral positions —
+all real institutional programs, but no specific monsoon/radar/ML-relevant group
+or open call was identified for any of them (generic careers pages only). Not
+added per the standing never-assume rule; can revisit if a specific named group
+surfaces.
