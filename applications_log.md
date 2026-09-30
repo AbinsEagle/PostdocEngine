@@ -315,3 +315,33 @@ all real institutional programs, but no specific monsoon/radar/ML-relevant group
 or open call was identified for any of them (generic careers pages only). Not
 added per the standing never-assume rule; can revisit if a specific named group
 surfaces.
+
+## 30 Sep 2026 — weekly scan (Claude Code)
+
+**Deadline audit (today 30 Sep):** no tracked item crosses a deadline today —
+all prior closures (MSCA-PF, ETH, KIT/HITS, Gothenburg, ICTP, GFZ, Penn State,
+Exeter) remain as recorded.
+
+**Four new leads, all independently verified (not snippet-only):**
+
+- ⚠ **Stanford — Thompson Postdoctoral Fellowship** (Dept. of Geophysics,
+  Convection & Climate Group). Explicit MJO + ML focus alongside tropical
+  cyclones and atmospheric rivers — a strong theoretical-methods fit.
+  **Deadline is 1 Oct 2026 — tomorrow.** https://findajob.agu.org/job/8027878/
+  Flagged urgent on the dashboard; realistically too little notice for a
+  tailored application, but surfaced in case Rona wants to move fast anyway.
+- **Columbia LDEO — South Asia Monsoon Low-Pressure Systems** (w/ CCNY).
+  Mechanisms of LPS variability, ENSO-monsoon teleconnections — squarely
+  Indian-monsoon-dynamics, strong India-relevance. Open until filled. No
+  direct posting page found; linked via the GEWEX listings page.
+- **UC Irvine — S2S & Seasonal Prediction** (Magnusdottir group, Earth System
+  Science). Ocean-atmosphere S2S/seasonal precipitation prediction. Posted via
+  UW's environment job board; a ~14 Oct next-review date was mentioned in one
+  search result but not independently confirmed — treat as unverified.
+- **UCAR C&GC Postdoctoral Fellowship** (NCAR/UCAR). Self-directed proposal
+  fellowship — strong prestige/funding, but needs an NCAR host mentor secured
+  before applying. Closes 16 Oct 2026 (confirmed on two sources).
+
+All four added to the dashboard as leads (score null), per the standing rule
+of never auto-scoring a fresh find. WebFetch still egress-blocked; next scan
+7 Oct.
