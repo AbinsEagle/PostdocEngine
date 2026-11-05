@@ -345,3 +345,36 @@ Exeter) remain as recorded.
 All four added to the dashboard as leads (score null), per the standing rule
 of never auto-scoring a fresh find. WebFetch still egress-blocked; next scan
 7 Oct.
+
+## 5 Nov 2026 — scan (Claude Code)
+
+Board hadn't been touched since 30 Sep (5-week gap; the 7 Oct next-scan target
+was missed).
+
+**Outcomes needing Rona's confirmation (not assumed):**
+- **Stanford Thompson Fellowship** — closed. Note: sources disagree on the
+  actual deadline (15 Sep vs 1 Oct seen in different searches) — flagged
+  honestly rather than picking one; moot now either way since both are past.
+  Did this get submitted before either date?
+- **UCAR C&GC Fellowship** — closed 16 Oct. Was a host mentor secured and the
+  proposal submitted?
+
+**Correction:** UC Irvine (Magnusdottir group, S2S/seasonal prediction) — the
+real deadline is a two-stage review: 14 Oct priority date (passed) then a
+**final date of 31 Dec 2026**, with late applicants considered only if the
+post is still unfilled. This replaces the earlier "~14 Oct unverified" note.
+The original listing reportedly has a typo in its deadline time — worth
+confirming directly before relying on it.
+
+**New lead:** **MBZUAI (Abu Dhabi) — Postdoctoral Researcher, AI for Weather
+Forecasting.** Probabilistic ensemble deep learning, uncertainty
+quantification, data assimilation — solid methods overlap with her
+GRU-LSTM/calibration work, though not monsoon/tropics-specific and no India
+tie. **Deadline genuinely conflicts across sources** — seen as 5 Nov (today),
+6 Nov, 6 Dec, and 31 Dec in different listings/aggregators. Added as a lead
+with deadline left blank on the dashboard rather than guessing; needs
+verification on MBZUAI's own careers site before anything else, urgently
+given one source says it closes today.
+
+**Method note:** WebSearch only; WebFetch to job boards remains blocked. Next
+scan 12 Nov.
