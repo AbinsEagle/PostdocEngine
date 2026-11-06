@@ -378,3 +378,42 @@ given one source says it closes today.
 
 **Method note:** WebSearch only; WebFetch to job boards remains blocked. Next
 scan 12 Nov.
+
+## 6 Nov 2026 — link audit (Claude Code)
+
+Rona reported that recently-updated links showed "no longer available" when
+clicked. Checked each individually rather than assuming it was one blanket
+problem:
+
+- **UC Irvine** — the link was a University of Washington mirror posting, not
+  UC Irvine's own application portal. **Fixed** → UCI Recruit, JPF10438
+  (https://recruit.ap.uci.edu/JPF10438).
+- **MBZUAI** — the link was a Times Higher Education aggregator listing, not
+  MBZUAI's own site. **Fixed** → their official careers portal
+  (https://careers.mbzuai.ac.ae/research-vacancies/). Deadline still needs
+  confirming there directly.
+- **UCAR C&GC** — the Workday posting genuinely closed on its 17 Oct deadline
+  and Workday pulled it down. This is expected platform behaviour once a req
+  closes, not a bad link. Swapped the dashboard link to the program's stable
+  recruitment-info page so it no longer dead-ends.
+- **Argonne** — the DOE-ASR mirror link had gone stale. Swapped to a fresher,
+  currently-posted Workday requisition for a closely related role: AI
+  Foundation Models for Atmospheric Science (the AERIS seasonal-to-subseasonal
+  model, with ocean coupling) — arguably a better fit than the original find.
+- **NUS** — genuinely looks expired: the listing's own posted date is December
+  2025, over 11 months old. No better link was found, so it's flagged
+  honestly as likely stale rather than silently kept. Added the project name
+  ("Enhancements of Singapore's Convective Rainfall Prediction") and host
+  institute (Coastal Protection and Flood Resilience Institute, Dept. of
+  Civil & Environmental Engineering) so a fresh search is possible if Rona
+  wants to check for a successor posting.
+- **NTU** and **Stanford** — confirmed fine as-is. NTU's apply route is a
+  direct email, which doesn't rot the way a portal link does. Stanford's AGU
+  listing is still indexed; its status now also carries a direct PI contact
+  (Da Yang, dayang@stanford.edu) as a fallback, since the deadline's closed
+  regardless.
+
+**Going forward:** prefer an institution's own careers portal over an
+aggregator/mirror site whenever one is findable — mirrors (Times Higher
+Education, DOE-ASR syndication, cross-posted university boards) go stale
+faster and less predictably than the source.
