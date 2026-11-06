@@ -51,6 +51,13 @@
     padding:13px 14px;font:inherit;font-size:.9rem;color:var(--body);outline:none;cursor:pointer;max-width:42%;}
   .search select:focus{border-color:var(--accent);}
 
+  .viewtabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:4px;}
+  .vtab{flex:1;text-align:center;padding:9px 10px;border-radius:9px;font-size:.86rem;
+    font-weight:600;color:var(--muted);cursor:pointer;transition:.12s;}
+  .vtab:hover{color:var(--body);}
+  .vtab.active{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.06);}
+
   .chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px;
     scrollbar-width:none;-ms-overflow-style:none;margin:0 -20px;padding-left:20px;padding-right:20px;}
   .chips::-webkit-scrollbar{display:none;}
@@ -183,13 +190,14 @@
 
 <div class="wrap">
   <div class="tools">
+    <div class="viewtabs" id="viewTabs"></div>
     <div class="search">
       <input id="kw" placeholder="Search — monsoon, radar, ML…">
       <select id="locSel"><option value="">All locations</option></select>
     </div>
     <div class="chips" id="chips"></div>
     <div class="status-line">
-      <span><b id="resCount">0</b> openings &amp; leads</span>
+      <span><b id="resCount">0</b> <span id="resLabel">openings</span></span>
       <span>scan <b id="lastScan"></b> · next <b id="nextScan"></b></span>
     </div>
     <div id="banner" class="banner"></div>
@@ -350,26 +358,39 @@ const TIERS = [
   {f:"urgent",  label:"Urgent"},
   {f:"submitted",label:"In progress"},
   {f:"watch",   label:"Watch"},
-  {f:"lead",    label:"Leads"},
+];
+const VIEWS = [
+  {v:"openings", label:"Live Openings"},
+  {v:"resources",label:"Resources & Leads"},
 ];
 const SUBLABELS = ["Stability","Fit","India","Prestige","Perm"];
 
-let state = { tier:"shortlist", q:"", loc:"" };
-let LIVE = []; // live, unverified openings pulled by the Refresh button
+let state = { view:"openings", tier:"shortlist", q:"", loc:"" };
+let LIVE = []; // results pulled by the Refresh button
 const saved = new Set(JSON.parse(localStorage.getItem("pe_saved")||"[]"));
 
+// Only real, verified postings belong on the Live Openings tab. NVIDIA's
+// refresh path returns "suggested" groups/programs to verify, not confirmed
+// vacancies, so those route to Resources & Leads alongside the static leads.
+function pool(){
+  const liveOpenings = LIVE.filter(j=>!j.suggested);
+  const liveResources = LIVE.filter(j=>j.suggested);
+  return state.view==="resources"
+    ? [...liveResources, ...JOBS.filter(j=>j.tier==="lead")]
+    : [...liveOpenings, ...JOBS.filter(j=>j.tier!=="lead")];
+}
 function matchTier(j,f){
   if(f==="shortlist") return j.score>=7;
   if(f==="urgent") return j.deadline && days(j.deadline)>=0 && days(j.deadline)<=15;
   if(f==="submitted") return j.tier==="submitted";
   if(f==="watch") return j.tier==="watch";
-  if(f==="lead") return j.tier==="lead";
   return true;
 }
 function filtered(){
   const q = state.q.toLowerCase(), loc = state.loc.toLowerCase();
-  return [...LIVE, ...JOBS]
-    .filter(j=>matchTier(j,state.tier))
+  let list = pool();
+  if(state.view==="openings") list = list.filter(j=>matchTier(j,state.tier));
+  return list
     .filter(j=>!q || (j.t+j.org+j.loc+j.tags.join(" ")).toLowerCase().includes(q))
     .filter(j=>!loc || j.loc.toLowerCase().includes(loc))
     .sort((a,b)=>(b.score??-1)-(a.score??-1));
@@ -426,9 +447,13 @@ function jobCard(j){
 function renderCards(){
   const list = filtered();
   const el = document.getElementById("cards");
-  el.innerHTML = list.length ? list.map(jobCard).join("")
+  const emptyMsg = state.view==="resources"
+    ? `<div class="empty"><b>No matches</b><br>Try clearing your search or location.</div>`
     : `<div class="empty"><b>No matches</b><br>Try another filter or clear your search.</div>`;
+  el.innerHTML = list.length ? list.map(jobCard).join("") : emptyMsg;
   document.getElementById("resCount").textContent = list.length;
+  document.getElementById("resLabel").textContent = state.view==="resources"
+    ? "resources & leads to pursue" : "live openings";
   el.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",e=>{
     e.preventDefault(); e.stopPropagation();
     const key = decodeURIComponent(b.dataset.save);
@@ -438,9 +463,24 @@ function renderCards(){
   }));
 }
 
+function renderTabs(){
+  document.getElementById("viewTabs").innerHTML = VIEWS.map(v=>
+    `<div class="vtab ${state.view===v.v?"active":""}" data-view="${v.v}">${v.label}</div>`
+  ).join("");
+  document.querySelectorAll("[data-view]").forEach(o=>o.addEventListener("click",()=>{
+    if(state.view===o.dataset.view) return;
+    state.view=o.dataset.view; state.tier="all";
+    renderTabs(); renderChips(); renderCards();
+  }));
+}
+
 function renderChips(){
-  document.getElementById("chips").innerHTML = TIERS.map(t=>{
-    const n = JOBS.filter(j=>matchTier(j,t.f)).length;
+  const el = document.getElementById("chips");
+  if(state.view==="resources"){ el.innerHTML=""; el.style.display="none"; return; }
+  el.style.display="";
+  const base = JOBS.filter(j=>j.tier!=="lead");
+  el.innerHTML = TIERS.map(t=>{
+    const n = base.filter(j=>matchTier(j,t.f)).length;
     return `<div class="chip ${state.tier===t.f?"active":""}" data-tier="${t.f}">${t.label}<span class="n">${n}</span></div>`;
   }).join("");
   document.querySelectorAll("[data-tier]").forEach(o=>o.addEventListener("click",()=>{
@@ -492,8 +532,9 @@ async function refresh(){
       renderChips(); renderCards();
       const via = data.provider === "nvidia" ? "NVIDIA" : "Anthropic web-search";
       const kind = data.provider === "nvidia" ? "ai-suggested targets to verify" : "live openings (unverified)";
+      const tabHint = data.provider === "nvidia" ? " Check the Resources & Leads tab." : "";
       if (LIVE.length) showBanner(data.provider === "nvidia" ? "warn" : "ok",
-        "Found " + LIVE.length + " " + kind + " via " + via + " — verify each before scoring.");
+        "Found " + LIVE.length + " " + kind + " via " + via + " — verify each before scoring." + tabHint);
       else showBanner("warn", "No results this scan (via " + via + ").");
     }
   } catch (e) {
@@ -504,7 +545,7 @@ async function refresh(){
 }
 document.getElementById("refreshBtn").addEventListener("click", refresh);
 
-renderSide(); renderChips(); renderLocations(); renderCards();
+renderSide(); renderTabs(); renderChips(); renderLocations(); renderCards();
 </script>
 </body>
 </html>
