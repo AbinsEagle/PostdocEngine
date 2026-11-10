@@ -120,6 +120,51 @@ export function validateSources(data) {
   return errors;
 }
 
+const HEALTH_KINDS = new Set(["ok", "dead", "not-a-page", "redirected-home", "soft-closed", "blocked", "error"]);
+
+/** data/health.json is written by scripts/check-links.mjs. */
+export function validateHealth(data) {
+  const errors = [];
+  if (!data || typeof data !== "object") return ["health file is not an object"];
+  if (data.checked !== null && typeof data.checked !== "string") errors.push("checked must be null or a timestamp");
+  if (!data.links || typeof data.links !== "object" || Array.isArray(data.links)) return [...errors, "links must be an object keyed by job id"];
+  for (const [id, rec] of Object.entries(data.links)) {
+    const at = `links.${id}`;
+    if (!ID.test(id)) errors.push(`${at}: key is not a job id`);
+    if (!rec || typeof rec !== "object") { errors.push(`${at}: not an object`); continue; }
+    if (!isHttpUrl(rec.url)) errors.push(`${at}: url must be an http(s) URL`);
+    if (!HEALTH_KINDS.has(rec.kind)) errors.push(`${at}: unknown kind ${JSON.stringify(rec.kind)}`);
+    if (rec.http !== null && typeof rec.http !== "number") errors.push(`${at}: http must be null or a number`);
+    if (!isRealDate(rec.checked)) errors.push(`${at}: checked must be a YYYY-MM-DD date`);
+    if ("detail" in rec && typeof rec.detail !== "string") errors.push(`${at}: detail must be text`);
+  }
+  return errors;
+}
+
+/** data/discover.json is written by scripts/discover.mjs. */
+export function validateDiscover(data) {
+  const errors = [];
+  if (!data || typeof data !== "object") return ["discover file is not an object"];
+  if (data.generated !== null && typeof data.generated !== "string") errors.push("generated must be null or a timestamp");
+  if (!Array.isArray(data.sources)) errors.push("sources must be an array");
+  if (!Array.isArray(data.items)) return [...errors, "items must be an array"];
+  const seen = new Set();
+  data.items.forEach((it, i) => {
+    const at = `items[${i}]`;
+    if (!it || typeof it !== "object") return void errors.push(`${at}: not an object`);
+    if (!text(it.id)) errors.push(`${at}: id must be non-empty text`);
+    else if (seen.has(it.id)) errors.push(`${at}: duplicate id ${it.id}`);
+    else seen.add(it.id);
+    if (!text(it.title)) errors.push(`${at}: title must be non-empty text`);
+    if (!isHttpUrl(it.url)) errors.push(`${at}: url must be an http(s) URL`);
+    if (!text(it.sourceName)) errors.push(`${at}: sourceName must be non-empty text`);
+    if (typeof it.summary !== "string") errors.push(`${at}: summary must be text`);
+    if (!Array.isArray(it.matched)) errors.push(`${at}: matched must be an array`);
+    if (it.published !== null && typeof it.published !== "string") errors.push(`${at}: published must be null or a timestamp`);
+  });
+  return errors;
+}
+
 function main() {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const load = (name) => JSON.parse(fs.readFileSync(path.join(root, "data", name), "utf8"));
@@ -127,6 +172,8 @@ function main() {
     ["data/jobs.json", () => validateJobs(load("jobs.json"))],
     ["data/board.json", () => validateBoard(load("board.json"))],
     ["data/sources.json", () => validateSources(load("sources.json"))],
+    ["data/health.json", () => validateHealth(load("health.json"))],
+    ["data/discover.json", () => validateDiscover(load("discover.json"))],
   ];
   let failed = 0;
   for (const [name, run] of checks) {

@@ -56,7 +56,7 @@ export function tabOf(state) {
 const LINK_PROBLEMS = {
   dead: "Link is dead",
   "not-a-page": "Link is not a web page",
-  "redirected-home": "Link redirects to a home page",
+  "redirected-home": "Link redirects away from the posting",
   "soft-closed": "Page says it is closed",
 };
 const LINK_UNVERIFIABLE = new Set(["blocked", "error"]);

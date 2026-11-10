@@ -1,0 +1,24 @@
+name: CI
+
+# Runs on every push and pull request. A malformed data edit or a broken
+# search change fails here instead of reaching the live site unnoticed.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate data files
+        run: node scripts/validate.mjs
+      - name: Run tests
+        run: node --test "tests/*.test.mjs"

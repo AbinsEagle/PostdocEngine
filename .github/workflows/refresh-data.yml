@@ -1,0 +1,74 @@
+name: Refresh data
+
+# Twice a week, on GitHub's network:
+#   1. request every tracked link and record what came back (data/health.json)
+#   2. read the job-board feeds and list relevant postings   (data/discover.json)
+#
+# Those two files are the only things this workflow ever changes. The curated
+# board (data/jobs.json) is edited by hand; nothing here scores or adds an opening.
+on:
+  schedule:
+    - cron: "17 2 * * 1,4" # Mondays and Thursdays, 02:17 UTC (07:47 IST)
+  workflow_dispatch:
+  # A trial run, without committing, whenever the pipeline itself is changed on a work branch.
+  push:
+    branches: ["claude/**"]
+    paths:
+      - "scripts/**"
+      - "data/sources.json"
+      - ".github/workflows/refresh-data.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Each half is allowed to fail without stopping the other; a failed half
+      # leaves its file untouched and is reported at the end.
+      - name: Check links
+        id: links
+        continue-on-error: true
+        run: node scripts/check-links.mjs
+
+      - name: Read feeds
+        id: feeds
+        continue-on-error: true
+        run: node scripts/discover.mjs
+
+      - name: Validate what was produced
+        run: node scripts/validate.mjs
+
+      - name: Commit refreshed data
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "postdoc-engine-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/health.json data/discover.json
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+          else
+            git commit -m "data: refresh link health and feed candidates"
+            git push
+          fi
+
+      - name: Report
+        if: always()
+        run: |
+          echo "Link check:  ${{ steps.links.outcome }}"
+          echo "Feed reader: ${{ steps.feeds.outcome }}"
+          if [ "${{ steps.links.outcome }}" != "success" ] || [ "${{ steps.feeds.outcome }}" != "success" ]; then
+            echo "::warning::One half of the refresh did not complete; its data file was left as it was."
+            exit 1
+          fi
