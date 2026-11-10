@@ -181,17 +181,37 @@ function apiError(code, status, detail) {
   const e = new Error(detail || code); e.code = code; e.status = status === 401 ? 401 : 502; return e;
 }
 
+// The model answers in the compact keys the prompt asks for (t, loc, link…);
+// the page reads the same field names as data/jobs.json.
 function normalize(j, extra) {
+  const text = (v) => (typeof v === "string" ? v.trim().slice(0, 600) : "");
   return {
-    t: j.t || "Untitled", org: j.org || "", loc: j.loc || "",
+    title: text(j.t) || "Untitled",
+    org: text(j.org),
+    country: text(j.loc),
+    url: httpUrl(j.link),
+    deadline: "deadline" in extra ? extra.deadline : (isoDate(j.deadline) || null),
     score: typeof j.score === "number" ? j.score : null,
-    s: Array.isArray(j.s) ? j.s : null,
-    status: j.status || "", tier: j.tier || "watch",
-    deadline: "deadline" in extra ? extra.deadline : (j.deadline || null),
-    link: j.link || "", tags: Array.isArray(j.tags) ? j.tags : [],
-    fit: j.why || j.fit || "", perk: j.perk || "",
-    live: !!extra.live, suggested: !!extra.suggested,
+    why: text(j.why || j.fit),
+    perk: text(j.perk),
+    tags: Array.isArray(j.tags) ? j.tags.map(text).filter(Boolean).slice(0, 8) : [],
+    note: text(extra.status || j.status),
+    live: !!extra.live,
+    suggested: !!extra.suggested,
   };
+}
+
+function httpUrl(v) {
+  try {
+    const u = new URL(String(v));
+    return u.protocol === "http:" || u.protocol === "https:" ? u.href : "";
+  } catch {
+    return "";
+  }
+}
+
+function isoDate(v) {
+  return typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "";
 }
 
 function extractJobs(text) {

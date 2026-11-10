@@ -3,7 +3,7 @@
 //   monsoon radar            both words (typos and prefixes tolerated)
 //   "machine learning"       exact phrase
 //   -theory                  exclude a word
-//   is:open                  open | closing | rolling | applied | lead | closed | saved | new | urgent
+//   is:open                  open | closing | rolling | applied | lead | closed | saved | new | urgent | broken
 //   -is:closed               any list operator can be negated
 //   in:japan                 country (also loc:, country:)
 //   tag:radar   org:columbia
@@ -15,7 +15,7 @@
 const FILTER_KEYS = new Set(["is", "in", "loc", "country", "tag", "org", "score", "due", "deadline", "has", "type"]);
 const KEY_ALIAS = { loc: "in", country: "in", deadline: "due" };
 
-const IS_VALUES = new Set(["open", "closing", "rolling", "applied", "lead", "closed", "saved", "new", "urgent"]);
+const IS_VALUES = new Set(["open", "closing", "rolling", "applied", "lead", "closed", "saved", "new", "urgent", "broken"]);
 const HAS_VALUES = new Set(["contact", "deadline", "score"]);
 const TYPE_VALUES = new Set(["opening", "lead"]);
 
@@ -165,14 +165,17 @@ const IS_TESTS = {
   applied: (it) => it.state === "applied",
   lead: (it) => it.state === "lead",
   closed: (it) => it.state === "closed",
-  new: (it) => it.isNew,
+  new: (it) => !!it.isNew,
+  broken: (it) => !!it.linkWarning, // the link check found a problem on something still actionable
   saved: (it, ctx) => ctx.saved.has(it.id),
 };
 
 /** Lower-cased text of everything searchable on an entry, for phrase and exclusion checks. */
 export function haystack(item) {
-  return [item.title, item.org, item.country, (item.tags || []).join(" "), item.fit, item.perk, item.note]
-    .filter(Boolean).join(" \n ").toLowerCase();
+  return [
+    item.title, item.org, item.country, (item.tags || []).join(" "), item.fit, item.perk, item.note,
+    item.summary, item.sourceName, // feed candidates
+  ].filter(Boolean).join(" \n ").toLowerCase();
 }
 
 const lc = (s) => String(s || "").toLowerCase();

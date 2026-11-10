@@ -1,0 +1,52 @@
+{
+  "note": "Feeds read by scripts/discover.mjs. A URL containing {q} is fetched once per entry in queries. Set enabled to false to rest a source without deleting it.",
+  "sources": [
+    {
+      "id": "agu-career-center",
+      "name": "AGU Career Center",
+      "type": "feed",
+      "enabled": true,
+      "url": "https://findajob.agu.org/jobsrss/?keywords={q}",
+      "queries": ["postdoctoral monsoon", "postdoctoral atmospheric dynamics", "postdoctoral weather machine learning", "postdoctoral radar precipitation", "postdoctoral tropical climate"]
+    },
+    {
+      "id": "nature-careers",
+      "name": "Nature Careers",
+      "type": "feed",
+      "enabled": true,
+      "url": "https://www.nature.com/naturecareers/jobsrss/?keywords={q}",
+      "queries": ["postdoctoral monsoon", "postdoctoral atmospheric science", "postdoctoral weather machine learning", "postdoctoral tropical climate"]
+    },
+    {
+      "id": "science-careers",
+      "name": "Science Careers",
+      "type": "feed",
+      "enabled": true,
+      "url": "https://jobs.sciencecareers.org/jobsrss/?keywords={q}",
+      "queries": ["postdoctoral atmospheric science", "postdoctoral climate machine learning"]
+    },
+    {
+      "id": "times-higher-education",
+      "name": "Times Higher Education",
+      "type": "feed",
+      "enabled": true,
+      "url": "https://www.timeshighereducation.com/unijobs/jobsrss/?keywords={q}",
+      "queries": ["postdoctoral atmospheric", "postdoctoral climate machine learning"]
+    },
+    {
+      "id": "chronicle-jobs",
+      "name": "Chronicle of Higher Education",
+      "type": "feed",
+      "enabled": true,
+      "url": "https://jobs.chronicle.com/jobsrss/?keywords={q}",
+      "queries": ["postdoctoral atmospheric science", "postdoctoral climate"]
+    },
+    {
+      "id": "egu-jobs",
+      "name": "EGU Jobs",
+      "type": "feed",
+      "enabled": true,
+      "url": "https://www.egu.eu/jobs/rss/"
+    }
+  ]
+}
