@@ -1,0 +1,706 @@
+{
+  "schema": 2,
+  "updated": "2026-11-10",
+  "jobs": [
+    {
+      "id": "ccrs-singapore",
+      "title": "CCRS Singapore — Centre for Climate Research",
+      "org": "CCRS / Met Service Singapore",
+      "country": "Singapore",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://ccrs.weather.gov.sg/careers-internships/",
+      "score": 8.1,
+      "subscores": [
+        9,
+        9,
+        7,
+        7,
+        7
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "monsoon",
+        "ISV",
+        "4hr from Kochi"
+      ],
+      "fit": "Their monsoon and intraseasonal-variability programme sits right on my onset-index and BSISO work; my GRU-LSTM onset pipeline and VHF-radar experience plug in from day one.",
+      "perk": "A tier-1 monsoon group 4 hours from Kochi, strong data infrastructure, and a brand that carries weight at IITM/MoES for a later India return.",
+      "note": "No open postings are listed. CCRS invites speculative CVs from meteorologists and climate scientists at the address below. Their careers page is several years old, so confirm the address is still monitored.",
+      "contacts": [
+        {
+          "name": "CCRS recruitment",
+          "email": "NEA_CCRS_Engage@nea.gov.sg"
+        }
+      ]
+    },
+    {
+      "id": "msca-pf-tu-delft",
+      "title": "MSCA-PF @ TU Delft (QPE × ISV)",
+      "org": "TU Delft · EU MSCA fellowship",
+      "country": "Netherlands",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-09-10",
+      "url": "https://marie-sklodowska-curie-actions.ec.europa.eu/actions/postdoctoral-fellowships",
+      "score": 8.05,
+      "subscores": [
+        8,
+        9,
+        8,
+        8,
+        6
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "fellowship",
+        "QPE",
+        "radar",
+        "family allowance"
+      ],
+      "fit": "QPE crossed with intraseasonal variability is exactly my radar-plus-onset intersection; my ML post-processing maps straight onto their precipitation-estimation work.",
+      "perk": "A portable fellowship means I pick the lab, it adds a family allowance, and it pairs me with a leading radar-QPE group and OPERA data.",
+      "note": "Not submitted. The 2026 call closed on 10 Sep. This is an annual call, so it is worth planning for 2027."
+    },
+    {
+      "id": "eth-zurich-fellowship",
+      "title": "ETH Zurich Postdoctoral Fellowship",
+      "org": "ETH Zurich",
+      "country": "Switzerland",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-09-01",
+      "url": "https://ethz.ch/en/research/research-promotion/eth-fellowships.html",
+      "score": 7.8,
+      "subscores": [
+        9,
+        7,
+        8,
+        9,
+        6
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "fellowship",
+        "highest savings tier"
+      ],
+      "fit": "ETH's tropical climate-dynamics work overlaps my ISV and jet-stream analysis, and I bring radar plus ML methods that are less common there.",
+      "perk": "The highest-savings tier, world-class methods training, and a name that is gold on any Indian scientist-post board.",
+      "note": "Not submitted. The call closed on 1 Sep."
+    },
+    {
+      "id": "tu-delft-euradca",
+      "title": "TU Delft EuRadCA — Radar QPE Postdoc",
+      "org": "TU Delft",
+      "country": "Netherlands",
+      "type": "opening",
+      "applied": "submitted",
+      "deadline": "2026-06-30",
+      "url": "https://careers.tudelft.nl/job/Delft-Postdoc-in-Radar-Based-Quantitative-Precipitation-Estimation-within-project-EuRadCA-2628-CD/1361379657/",
+      "score": 7.75,
+      "subscores": [
+        7,
+        9,
+        8,
+        8,
+        6
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "radar",
+        "QPE",
+        "OPERA"
+      ],
+      "fit": "A near-perfect match: radar-based QPE is my core, from the 205 MHz ST radar and signal processing to ML post-processing of precipitation.",
+      "perk": "A funded radar-QPE project built around exactly the instrument background I already have - the lowest ramp-up of any post here.",
+      "note": "Application submitted. The advert has since been taken down, which is normal once a post closes.",
+      "contacts": [
+        {
+          "name": "Dr. Marc Schleiss (PI)",
+          "email": "m.a.schleiss@tudelft.nl"
+        }
+      ]
+    },
+    {
+      "id": "ictp-c3s-downscaling",
+      "title": "ICTP ESP — ML Climate Downscaling (C3S, 2 posts)",
+      "org": "ICTP Trieste · Copernicus C3S",
+      "country": "Italy",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-07-18",
+      "url": "https://www.ictp.it/opportunity/earth-system-physics-postdoctoral-fellowships-2026",
+      "score": 7.3,
+      "subscores": [
+        6,
+        8,
+        9,
+        8,
+        5
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "deep learning",
+        "downscaling",
+        "PyTorch",
+        "India brand ★",
+        "2+1 yr"
+      ],
+      "fit": "ML downscaling runs on my GRU-LSTM and Python stack, and my monsoon domain knowledge sharpens the regional signal.",
+      "perk": "India-brand heavyweight via ICTP's developing-country network, a PyTorch deep-learning role, and a 2+1 year runway.",
+      "note": "Closed 18 Jul. Not submitted."
+    },
+    {
+      "id": "ictp-closer-attribution",
+      "title": "ICTP ESP — Extremes Attribution (CLOSER, 2 posts)",
+      "org": "ICTP Trieste · HORIZON CLOSER",
+      "country": "Italy",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-07-18",
+      "url": "https://www.ictp.it/news/2026/6/four-climate-postdoc-positions-available",
+      "score": 6.8,
+      "subscores": [
+        6,
+        6,
+        9,
+        8,
+        5
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "attribution",
+        "RCM",
+        "Fortran"
+      ],
+      "fit": "My TEJ-regime and west-coast extreme-rainfall dynamics, plus BSISO drivers, line up with extremes attribution; RCM exposure would broaden my toolkit.",
+      "perk": "Same ICTP portal as the C3S post - a strategic second shot - with an India-relevant extremes focus.",
+      "note": "Closed 18 Jul. Not submitted. It was the strategic backup to the C3S post on the same portal."
+    },
+    {
+      "id": "jsps-fellowship",
+      "title": "JSPS Postdoctoral Fellowship",
+      "org": "JSPS Japan",
+      "country": "Japan",
+      "type": "opening",
+      "applied": "submitted",
+      "deadline": null,
+      "url": "https://www.jsps.go.jp/english/e-fellow/e-ippan/index.html",
+      "score": 6.95,
+      "subscores": [
+        6,
+        7,
+        8,
+        8,
+        6
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "fellowship",
+        "prestige"
+      ],
+      "fit": "Japan's radar atmospheric science (Kyoto RISH / MU radar) is a sister instrument to ACARR, so my radar signal-processing transfers directly.",
+      "perk": "A prestigious national fellowship and MU-radar access - direct continuity with my VHF ST radar background.",
+      "note": "Application submitted (by 10 Sep)."
+    },
+    {
+      "id": "kaust-postdoc",
+      "title": "KAUST Postdoc",
+      "org": "KAUST",
+      "country": "Saudi Arabia",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://kgfp.kaust.edu.sa/apply/",
+      "score": 6.85,
+      "subscores": [
+        10,
+        5,
+        6,
+        6,
+        5
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "tax-free",
+        "housing",
+        "₹35–50L/yr"
+      ],
+      "fit": "My ML and monsoon skills fit their earth-system ML themes, though the specific group's ISV depth still needs checking.",
+      "perk": "Tax-free salary plus housing and serious compute - the strongest savings on the board - if the research fit checks out.",
+      "note": "The KAUST Global Postdoctoral Fellowship (KGFP) Call 2027 is effectively missed: its Stage 1 concept-note window closed on 1 Oct, and Stage 2 (due 15 Jan 2027) is by invitation only. KAUST also fills regular postdoc positions on a rolling basis, which is a separate track. Research fit is still unverified.",
+      "contacts": [
+        {
+          "name": "KGFP office",
+          "email": "kgfp@kaust.edu.sa"
+        }
+      ]
+    },
+    {
+      "id": "kit-hits-wow",
+      "title": "KIT/HITS — ML Weather Calibration (WOW project)",
+      "org": "KIT & HITS Heidelberg (Gneiting/Nowack/Stühmer)",
+      "country": "Germany",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-07-30",
+      "url": "https://www.nature.com/naturecareers/job/12861291/postdoctoral-researcher-f-m-d-in-computer-science-or-statistics/",
+      "score": 6.65,
+      "subscores": [
+        6,
+        7,
+        7,
+        8,
+        5
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "verification",
+        "scoring rules",
+        "ML weather"
+      ],
+      "fit": "Forecast post-processing and calibration are adjacent to my ML onset-verification work; Gneiting's scoring-rule methods would sharpen my prediction models.",
+      "perk": "A methods-rich ML/statistics group and stable German public-sector (TV-L) pay - a solid safety net that still grows my skills.",
+      "note": "Closed 30 Jul. The safety net lapsed; not pursued."
+    },
+    {
+      "id": "gothenburg-par-2026-530",
+      "title": "Gothenburg PAR 2026/530",
+      "org": "University of Gothenburg",
+      "country": "Sweden",
+      "type": "opening",
+      "applied": "submitted",
+      "deadline": "2026-07-31",
+      "url": "https://www.gu.se/en/work-at-the-university-of-gothenburg/vacancies",
+      "score": 6.45,
+      "subscores": [
+        7,
+        6,
+        6,
+        7,
+        6
+      ],
+      "added": "2026-07-21",
+      "tags": [],
+      "fit": "A broad atmospheric-dynamics fit; my dynamics and ML apply, though the group's monsoon relevance is thinner.",
+      "perk": "Already in progress, with Scandinavian stability and work-life balance - a dependable fallback.",
+      "note": "Application submitted. The call closed on 31 Jul."
+    },
+    {
+      "id": "gfz-genai4earth",
+      "title": "GFZ Potsdam — GenAI4Earth Postdoc",
+      "org": "GFZ / Helmholtz",
+      "country": "Germany",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-07-22",
+      "url": "https://www.nature.com/naturecareers/job/12861313/postdoctoral-researcher-f_m_x-generative-ai-for-earth-system-sciences",
+      "score": 6.35,
+      "subscores": [
+        7,
+        6,
+        6,
+        7,
+        5
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "generative AI",
+        "3-yr TVöD 13"
+      ],
+      "fit": "Generative AI for earth-system science would stretch my ML into new methods, but the monsoon/radar tie is weak.",
+      "perk": "A 3-year public-sector contract and GenAI upskilling - below my threshold, so watch only unless the fit strengthens.",
+      "note": "Closed 22 Jul. Below threshold; not pursued."
+    },
+    {
+      "id": "columbia-lamont-pdrs",
+      "title": "Columbia Lamont-Doherty — PDRS Radiation/Circulation",
+      "org": "Columbia University",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": null,
+      "url": "http://www.ldeo.columbia.edu/postdoc",
+      "score": 6,
+      "subscores": [
+        5,
+        6,
+        7,
+        8,
+        4
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "theory",
+        "Lamont brand"
+      ],
+      "fit": "More radiation/circulation theory than my observational-ML core, with only partial overlap on tropical circulation.",
+      "perk": "The Lamont brand is strong, but the day-to-day fit is thin - keep as a watch.",
+      "note": "Advertised as open until filled, but the original requisition page could not be confirmed as still live, so the link goes to LDEO's postdoc page. Ask whether the post is still open before investing time. (LDEO's separate general fellowship call closed on 6 Nov.)",
+      "contacts": [
+        {
+          "name": "Prof. Robert Pincus (closest topical match at LDEO; not confirmed as this post's PI)",
+          "email": "rp2863@columbia.edu"
+        }
+      ]
+    },
+    {
+      "id": "penn-state-pches-adapt",
+      "title": "Penn State EESI — PCHES-ADAPT Postdoc",
+      "org": "Penn State",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-07-19",
+      "url": "https://findajob.agu.org/job/8026736/postdoctoral-scholar-in-transdisciplinary-climate-research/",
+      "score": 5.85,
+      "subscores": [
+        5,
+        6,
+        7,
+        7,
+        4
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "climate extremes",
+        "DOE"
+      ],
+      "fit": "Climate-extremes themed but transdisciplinary and DOE-policy leaning, with little radar or ISV content.",
+      "perk": "Below threshold and off-core - not being pursued.",
+      "note": "Closed 19 Jul. Below threshold; not pursued."
+    },
+    {
+      "id": "exeter-natalie",
+      "title": "Exeter — NATALIE AI for Nature-Based Solutions",
+      "org": "University of Exeter",
+      "country": "UK",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-08-20",
+      "url": "https://www.jobs.ac.uk/job/DSE987/postdoctoral-research-fellow",
+      "score": 5.4,
+      "subscores": [
+        5,
+        5,
+        6,
+        7,
+        4
+      ],
+      "added": "2026-07-21",
+      "tags": [
+        "AI",
+        "hydro-climate"
+      ],
+      "fit": "AI plus hydro-climate touches my ML, but nature-based-solutions is well off my core science.",
+      "perk": "A ~23-month contract, below threshold - parked as a watch.",
+      "note": "Closed 20 Aug. Below threshold (a contract of about 23 months); not pursued."
+    },
+    {
+      "id": "birmingham-heppi-ml",
+      "title": "Birmingham HEPPI-ML — outreach target",
+      "org": "Univ. of Birmingham · WCSSP India",
+      "country": "UK",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://www.jobs.ac.uk/job/DQU681/research-fellow-in-weather-forecast-postprocessing-with-machine-learning-school-of-geography-earth-and-environmental-sciences",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-21",
+      "tags": [
+        "monsoon precipitation",
+        "post-processing ML",
+        "~9/10 fit"
+      ],
+      "fit": "About 9/10: heavy-precipitation forecast post-processing over India with ML is squarely my onset/QPE + ML + India expertise.",
+      "perk": "A WCSSP-India tie (direct India collaboration) and a near-perfect topical match - worth a speculative email even though the ad expired.",
+      "note": "The advert has expired (it referenced a Nov/Dec 2025 start), but the HEPPI-ML contacts are known. A speculative email is drafted and waiting for approval (Draft 2 in applications_log.md).",
+      "contacts": [
+        {
+          "name": "Dr. Martin Widmann",
+          "email": "m.widmann@bham.ac.uk"
+        },
+        {
+          "name": "Dr. Nadezhda Mamontova",
+          "email": "n.mamontova@bham.ac.uk"
+        }
+      ]
+    },
+    {
+      "id": "uchicago-project-cirrus",
+      "title": "UChicago — Project Cirrus (AI weather for the tropics)",
+      "org": "University of Chicago · UC Berkeley (Hassanzadeh / Shaw / Boos)",
+      "country": "USA",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://climate.uchicago.edu/opportunities/postdoc-research-scientist-ai-weather-forecasting/",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-21",
+      "tags": [
+        "AI weather",
+        "S2S tropics",
+        "Indian monsoon onset",
+        "~9/10 fit"
+      ],
+      "fit": "Their whole programme is AI forecasting of the Indian monsoon onset and tropical S2S — the exact problem my GRU-LSTM onset system already solves; I would arrive with a working, verified pipeline.",
+      "perk": "A flagship AI-weather group whose monsoon forecasts already reach India's Ministry of Agriculture (38M farmers) — unmatched India impact and a direct bridge back to IITM/NCMRWF. Last cohort closed, so treat as a watch-and-contact target.",
+      "note": "The January 2026 Project Cirrus cohort has closed. UChicago also lists a second call, 'AI weather forecasting across scales' (CeTD group, S2S), seen on 10 Aug and not verified since. A watch-and-contact target."
+    },
+    {
+      "id": "mpi-m-incubator",
+      "title": "MPI-M Hamburg — Incubator Program (MSCA/Humboldt host)",
+      "org": "Max Planck Institute for Meteorology",
+      "country": "Germany",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://mpimet.mpg.de/en/career/postdoc-opportunities",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-21",
+      "tags": [
+        "funded stay €2,500/mo",
+        "tropical waves groups",
+        "host route"
+      ],
+      "fit": "MPI-M's tropical-wave and BSISO groups align with my intraseasonal work, and the incubator funds a stay to co-write an MSCA or Humboldt proposal with a host.",
+      "perk": "A paid route (about EUR 2,500/mo) into two fellowship tracks at once - host-finding with money attached.",
+      "note": "Route: send a one-page idea and a CV to a group leader. The incubator funds a stay to co-write a fellowship proposal (MSCA or Humboldt) with a host."
+    },
+    {
+      "id": "kyoto-rish",
+      "title": "Kyoto Univ. RISH — Radar Atmospheric Science Lab (JSPS host target)",
+      "org": "RISH, Kyoto University (MU radar)",
+      "country": "Japan",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://www.rish.kyoto-u.ac.jp/category/news_en/?lang=en",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-21",
+      "tags": [
+        "VHF ST radar",
+        "MU radar",
+        "JSPS route",
+        "perfect radar fit"
+      ],
+      "fit": "The MU radar is the sister of ACARR's VHF ST radar, so my signal-processing and wind-profiling skills transfer one-to-one.",
+      "perk": "Perfect radar continuity and a strong JSPS host - the cleanest instrument match on the board.",
+      "note": "JSPS host candidate: the MU radar is the sister instrument to ACARR's VHF radar. Host scouting was planned for AOGS (1 to 7 Aug). The JSPS application has since been submitted; the host named on it is not recorded here."
+    },
+    {
+      "id": "iap-cas-beijing",
+      "title": "IAP-CAS Beijing — Monsoon/ISV group (Prof. Lin Wang)",
+      "org": "Institute of Atmospheric Physics, Chinese Academy of Sciences",
+      "country": "China",
+      "type": "lead",
+      "applied": null,
+      "deadline": null,
+      "url": "https://pifi.cas.cn/",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-21",
+      "tags": [
+        "Asian monsoon",
+        "intraseasonal predictability",
+        "PIFI route",
+        "verify visa"
+      ],
+      "fit": "Prof. Lin Wang's Asian-monsoon intraseasonal-predictability group is a direct topical match to my BSISO and onset research.",
+      "perk": "A strong monsoon group with real predictability work, now with a named funding mechanism (PIFI) once a host agrees - but confirm spouse work rights before any outreach (a silent-parameter caveat).",
+      "note": "Funding route: the CAS PIFI fellowship (¥200k a year, 1 to 2 years, reviewed year-round). PIFI takes no direct applications; the host applies on your behalf, so contacting the PI is the first step. Spouse work rights are still unclear: send the HR query (Rule 2) before any outreach."
+    },
+    {
+      "id": "argonne-aeris-s2s",
+      "title": "Argonne — AI Foundation Models for Atmospheric Science (AERIS S2S)",
+      "org": "Argonne National Laboratory",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": null,
+      "url": "https://argonne.wd1.myworkdayjobs.com/en-US/Argonne_Careers/job/Postdoctoral-Appointee---AI-Foundation-Models-for-Atmospheric-Science_421783",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-28",
+      "tags": [
+        "ML weather",
+        "S2S",
+        "foundation models",
+        "generative AI"
+      ],
+      "fit": "Extending an ML weather model to sub-seasonal-to-seasonal prediction is exactly my GRU-LSTM / S2S onset space; my monsoon-onset pipeline and calibration work transfer directly.",
+      "perk": "A US national-lab ML-weather group with serious compute and a foundation-model programme — strong methods growth, though spouse work rights (J-2 EAD) and the group's monsoon relevance need checking.",
+      "note": "A currently posted Argonne requisition for the AERIS seasonal-to-subseasonal AI model (about 28 days old when seen on 6 Nov). No deadline is shown, so verify it is still open. Spouse work rights (J-2 EAD) and monsoon relevance need checking."
+    },
+    {
+      "id": "nus-ml-hydromet",
+      "title": "NUS — Research Fellow, ML for Hydro-Meteorology",
+      "org": "National University of Singapore",
+      "country": "Singapore",
+      "type": "opening",
+      "applied": null,
+      "deadline": null,
+      "url": "https://careers.nus.edu.sg/job/Research-Fellow-%28Machine-Learning-for-Hydro-Meteorological-Domain%29/29756-en_GB",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-28",
+      "tags": [
+        "ML rainfall",
+        "convective QPE",
+        "tropical",
+        "Singapore"
+      ],
+      "fit": "Physics-informed ML for convective rainfall is QPE-adjacent to my radar and ML-prediction core, in a tropical setting close to my monsoon domain.",
+      "perk": "A second Singapore foothold (strong spouse work rights, 4 hours from Kochi) at a top-brand university — a good India-return springboard if the group's ISV/monsoon depth checks out.",
+      "note": "Presumed closed: the listing's own posted date is December 2025. Not confirmed. A successor post would sit under the project 'Enhancements of Singapore's Convective Rainfall Prediction' (Coastal Protection and Flood Resilience Institute, Civil & Environmental Engineering).",
+      "closed": true
+    },
+    {
+      "id": "ntu-ocean-center-s2s",
+      "title": "NTU Ocean Center — DA & AI-enhanced S2S forecast",
+      "org": "National Taiwan University · w/ Central Weather Administration",
+      "country": "Taiwan",
+      "type": "opening",
+      "applied": null,
+      "deadline": null,
+      "url": "https://www.egu.eu/jobs/7871/postdoctoral-research-or-higher-level-opportunity-in-data-assimilation-and-ai-enhanced-s2s-forecast/",
+      "score": null,
+      "subscores": null,
+      "added": "2026-07-28",
+      "tags": [
+        "AI S2S",
+        "data assimilation",
+        "coupled model",
+        "direct outreach"
+      ],
+      "fit": "AI-enhanced S2S prediction with data assimilation is dead-centre on my ML-onset and subseasonal-prediction work; my GRU-LSTM pipeline and MJO/BSISO background transfer straight into their GEPSv3 hybrid framework.",
+      "perk": "An operational tie to the Central Weather Administration (real forecast impact) and hands-on coupled-model + DA skills I don't yet have — a strong methods step-up, pending spouse work-rights and India-return-brand checks.",
+      "note": "Open until filled. Apply by email: send a CV and publication list to Prof. Tseng with the subject line 'Postdoc Application-DA & AI S2S forecast'. Spouse work rights are unverified (Rule 2).",
+      "contacts": [
+        {
+          "name": "Prof. Yu-heng Tseng",
+          "email": "tsengyh@ntu.edu.tw"
+        }
+      ]
+    },
+    {
+      "id": "stanford-thompson",
+      "title": "Stanford — Thompson Postdoctoral Fellowship (Convection & Climate)",
+      "org": "Stanford University · Dept. of Geophysics",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-10-01",
+      "url": "https://findajob.agu.org/job/8027878/postdoctoral-scholar-in-convection-rainstorms-and-climate-at-stanford/",
+      "score": null,
+      "subscores": null,
+      "added": "2026-09-30",
+      "tags": [
+        "MJO",
+        "convection theory",
+        "ML methods"
+      ],
+      "fit": "The group works explicitly on the Madden-Julian Oscillation and moist-convection organization using theory, observations and ML — directly overlapping my BSISO/ISV and GRU-LSTM work; my radar and onset-index background adds an observational angle to their theory-heavy approach.",
+      "perk": "A top-tier US climate-dynamics group and a named fellowship — strong prestige and methods depth, though it leans theoretical.",
+      "note": "Closed. Sources gave the deadline as 15 Sep or 1 Oct. Outcome not recorded.",
+      "contacts": [
+        {
+          "name": "Prof. Da Yang",
+          "email": "dayang@stanford.edu"
+        }
+      ]
+    },
+    {
+      "id": "columbia-ldeo-monsoon-lps",
+      "title": "Columbia LDEO — South Asia Monsoon Low-Pressure Systems",
+      "org": "Lamont-Doherty Earth Observatory, Columbia University (w/ CCNY)",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": null,
+      "url": "https://www.gewex.org/resources/position-announcements/",
+      "score": null,
+      "subscores": null,
+      "added": "2026-09-30",
+      "tags": [
+        "South Asia monsoon",
+        "LPS dynamics",
+        "ENSO-monsoon",
+        "India relevance"
+      ],
+      "fit": "Monsoon low-pressure-system variability and ENSO-monsoon teleconnections sit squarely in my Indian-monsoon dynamics core, adjacent to my onset/ISV focus; my ML and radar/QPE background would add a prediction angle to their mechanisms-focused work.",
+      "perk": "A Columbia/LDEO brand with a direct South-Asia-monsoon research focus and real India-disaster relevance — a strong India-return story, with a rolling deadline that allows time to prepare properly.",
+      "note": "Open until filled. Found through the GEWEX listings page; no direct posting page was located, so the link goes to GEWEX."
+    },
+    {
+      "id": "uc-irvine-s2s",
+      "title": "UC Irvine — S2S & Seasonal Prediction (Magnusdottir group)",
+      "org": "UC Irvine · Dept. of Earth System Science",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-12-31",
+      "url": "https://recruit.ap.uci.edu/JPF10438",
+      "score": null,
+      "subscores": null,
+      "added": "2026-09-30",
+      "tags": [
+        "S2S prediction",
+        "ocean-atmosphere",
+        "teleconnections",
+        "precipitation ML"
+      ],
+      "fit": "S2S-to-seasonal precipitation prediction via ocean-atmosphere interactions overlaps my GRU-LSTM onset and subseasonal work, and my tropical-teleconnection background (BSISO, TEJ) extends their tropical/extratropical scope.",
+      "perk": "A focused ML/S2S group with a precipitation-prediction core — solid methods growth, though no monsoon-specific or India tie is evident yet.",
+      "note": "Two-stage review: the 14 Oct priority date has passed and the final date is 31 Dec, with late applications considered only if the post is still unfilled. Team: Dr. Yannick Peings and Prof. Erik Sudderth (deep generative models) in Prof. Gudrun Magnusdottir's group. Needs a CV, a one-page cover letter and contact details for three referees."
+    },
+    {
+      "id": "ucar-cgc-fellowship",
+      "title": "UCAR C&GC Postdoctoral Fellowship",
+      "org": "NCAR / UCAR — Climate & Global Change Fellowship Program",
+      "country": "USA",
+      "type": "opening",
+      "applied": null,
+      "deadline": "2026-10-17",
+      "url": "https://cpaess.ucar.edu/cgc/annual-recruitment-announcement",
+      "score": null,
+      "subscores": null,
+      "added": "2026-09-30",
+      "tags": [
+        "fellowship",
+        "self-directed",
+        "NCAR host needed",
+        "prestige"
+      ],
+      "fit": "A self-directed fellowship would let me pursue my monsoon-onset/BSISO/ML research agenda with an NCAR mentor in atmospheric dynamics or S2S prediction — a strong methods and prestige step, contingent on finding a matching host.",
+      "perk": "NCAR-caliber prestige, salary, relocation and travel support, and full autonomy over the research direction — but it requires securing a host mentor before applying.",
+      "note": "Closed 17 Oct. Outcome not recorded. This is an annual programme; this year's call was posted in July."
+    },
+    {
+      "id": "mbzuai-ai-weather",
+      "title": "MBZUAI — Postdoctoral Researcher, AI for Weather Forecasting",
+      "org": "Mohamed bin Zayed University of Artificial Intelligence",
+      "country": "UAE",
+      "type": "opening",
+      "applied": null,
+      "deadline": null,
+      "url": "https://careers.mbzuai.ac.ae/research-vacancies/",
+      "score": null,
+      "subscores": null,
+      "added": "2026-11-05",
+      "tags": [
+        "ensemble DL",
+        "uncertainty quantification",
+        "data assimilation"
+      ],
+      "fit": "Probabilistic ensemble weather forecasting with deep learning, uncertainty quantification and data assimilation overlaps my GRU-LSTM prediction and calibration work, though the role isn't monsoon/tropics-specific.",
+      "perk": "A well-funded AI-focused university (MBZUAI) with strong compute and a 2-year fully-funded post — solid methods growth, but no India tie and the deadline needs resolving fast given the conflicting dates.",
+      "note": "Sources disagree on the deadline (5 Nov, 6 Nov, 6 Dec and 31 Dec were all listed), so none is recorded here. The first two have passed. Confirm on MBZUAI's careers site, under Postdoc & Research Support Vacancies."
+    }
+  ]
+}
