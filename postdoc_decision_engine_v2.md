@@ -18,9 +18,21 @@ You are running Rona's 5-day postdoc scan. On every session:
 4. Check every Section 4 deadline against today's date; flag anything within 10 days.
 5. Show Rona the results BEFORE editing this file. After approval, append openings
    scoring ≥ 7.0 to the Section 5 table and log actions in applications_log.md.
-   ALSO update index.html (the dashboard; served at the site root) on every run:
-   edit only its DATA BLOCK (META, JOBS,
-   MILESTONES, LOG arrays) — the page renders itself and computes countdowns live.
+   ALSO update the dashboard data on every run. Since 10 Nov 2026 the site is no longer
+   one HTML file; the data lives in two hand-edited JSON files:
+   - `data/jobs.json` — one record per entry. `type` is `opening` (a specific call you can
+     apply to) or `lead` (a group, programme or contact with no call open). `applied` is
+     `"submitted"` or `null`. `deadline` is `YYYY-MM-DD` or `null`. Set `closed: true` only
+     for an entry known to be closed that has no deadline date. `url` should be the
+     institution's own posting page wherever one exists, not an aggregator or mirror.
+     `added` is the date the entry was first recorded. Do NOT record state in tags or
+     titles: open / closing soon / applied / closed is derived from these fields and
+     today's date, so a passed deadline moves an entry by itself.
+   - `data/board.json` — `meta.lastScan` / `meta.nextScan`, `milestones`, and the scan `log`
+     (newest first).
+   Never edit `data/health.json` or `data/discover.json`; a GitHub Action writes them.
+   Before committing, run `node scripts/validate.mjs` and `node --test "tests/*.test.mjs"`
+   (CI runs the same two checks on every push).
 6. Draft (never send) any outreach emails due this session into applications_log.md.
    Email style: genuine, humble, concise, short sentences, no em dashes.
 
@@ -129,7 +141,19 @@ Aug 22 MSCA revision · Aug 27 MSCA v2 + ETH host contact · Sep 1 ETH cycle + M
 Sep 6 MSCA final · Sep 11 retro + Humboldt/CCRS/KAUST track · Sep 16-Oct 31 Humboldt,
 outreach, ANRF claim (courier by Oct 16), thesis balance.
 
-**Automated weekly scan (from 20 Jul 2026):** a Claude Code Routine runs every Monday
-9:00 IST — deadline audit + LOG/META refresh + UNVERIFIED lead surfacing (keyword search
-only), committed and pushed so the dashboard redeploys. Automated runs never score
-openings or append to the Section 5 shortlist; that always needs human verification.
+**Automated refresh (from 10 Nov 2026):** the GitHub Actions workflow
+`.github/workflows/refresh-data.yml` runs every Monday and Thursday at 02:17 UTC (07:47 IST)
+on GitHub's network, where the job boards are reachable. It does two things and commits
+the results so the dashboard redeploys:
+1. requests every tracked link and records what came back in `data/health.json` (shown
+   on each entry; search `is:broken` to list problems);
+2. reads the feeds listed in `data/sources.json` and writes relevant postings to
+   `data/discover.json` (the Discover tab).
+
+It never scores an opening and never edits `data/jobs.json`. Candidates under Discover are
+unreviewed pointers: in the weekly session, open the posting, verify it, score it against
+Section 2, and only then add it to `data/jobs.json`. Deadline countdowns need no
+automation at all — the page derives them on every load.
+
+(This replaces the Claude Code Routine planned on 16 Jul 2026, which could not be created
+durably. The hand-run weekly review — scoring, outreach drafts, Section 5 — is unchanged.)

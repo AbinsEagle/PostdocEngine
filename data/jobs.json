@@ -436,7 +436,7 @@
       "type": "lead",
       "applied": null,
       "deadline": null,
-      "url": "https://climate.uchicago.edu/opportunities/postdoc-research-scientist-ai-weather-forecasting/",
+      "url": "https://news.uchicago.edu/story/uchicago-team-wins-funding-develop-ai-weather-forecasts-underserved-areas",
       "score": null,
       "subscores": null,
       "added": "2026-07-21",
@@ -448,7 +448,7 @@
       ],
       "fit": "Their whole programme is AI forecasting of the Indian monsoon onset and tropical S2S — the exact problem my GRU-LSTM onset system already solves; I would arrive with a working, verified pipeline.",
       "perk": "A flagship AI-weather group whose monsoon forecasts already reach India's Ministry of Agriculture (38M farmers) — unmatched India impact and a direct bridge back to IITM/NCMRWF. Last cohort closed, so treat as a watch-and-contact target.",
-      "note": "The January 2026 Project Cirrus cohort has closed. UChicago also lists a second call, 'AI weather forecasting across scales' (CeTD group, S2S), seen on 10 Aug and not verified since. A watch-and-contact target."
+      "note": "The January 2026 Project Cirrus cohort has closed, and its posting page now returns 'not found' (checked 10 Nov), so the link points to the project's own announcement instead. UChicago also lists a second call, 'AI weather forecasting across scales' (CeTD group, S2S), seen on 10 Aug and not verified since. A watch-and-contact target."
     },
     {
       "id": "mpi-m-incubator",

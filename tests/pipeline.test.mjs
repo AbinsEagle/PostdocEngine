@@ -275,3 +275,37 @@ test("selectCandidates keeps an undated item and caps the list", () => {
   const many = Array.from({ length: 200 }, (_, i) => raw({ title: `Postdoc in monsoon prediction ${i}`, url: `https://a.org/job/${i}` }));
   assert.equal(selectCandidates(many, { now: NOW }).items.length, 80);
 });
+
+// ---------- noise the first real run exposed ----------
+
+test("a method word alone (AI, forecasting) never qualifies a post; a field word must be present", () => {
+  assert.equal(screen({ title: "Postdoctoral Researcher in AI for Digital Forensics", summary: "Deep learning and machine learning for evidence." }).keep, false);
+  assert.equal(screen({ title: "Postdoc in machine learning forecasting", summary: "Neural network models; predictability." }).keep, false);
+  assert.equal(screen({ title: "Postdoc in AI weather prediction", summary: "Deep learning for monsoon rainfall." }).keep, true);
+});
+
+test("splitTitle separates the employer prefix from the role", async () => {
+  const { splitTitle } = await import("../scripts/lib/relevance.mjs");
+  assert.deepEqual(splitTitle("MBZUAI: Postdoctoral Associate in Weather AI"), { org: "MBZUAI", role: "Postdoctoral Associate in Weather AI" });
+  assert.deepEqual(splitTitle("Postdoc: radar QPE").org, "");
+  assert.deepEqual(splitTitle("Postdoc in radar"), { org: "", role: "Postdoc in radar" });
+});
+
+test("alreadyTracked recognises a tracked posting reached under another address", async () => {
+  const { alreadyTracked } = await import("../scripts/lib/relevance.mjs");
+  const jobs = [{ org: "MBZUAI", title: "MBZUAI — Postdoctoral Associate in AI for Weather and Climate" }];
+  assert.equal(alreadyTracked({ title: "Mohamed bin Zayed University of Artificial Intelligence (MBZUAI): Postdoctoral Associate in AI for Weather and Climate" }, jobs), true, "a long-form name that carries the short form still matches");
+  assert.equal(alreadyTracked({ title: "MBZUAI: Postdoctoral Associate in AI for Weather and Climate" }, jobs), true);
+  assert.equal(alreadyTracked({ title: "MBZUAI: Postdoctoral Associate in Computer Vision" }, jobs), false, "same employer, different job");
+  assert.equal(alreadyTracked({ title: "ETH Zurich: Postdoctoral Associate in AI for Weather and Climate" }, jobs), false, "different employer");
+});
+
+test("selectCandidates folds one posting carried under two employer prefixes", () => {
+  const role = "Postdoctoral Research Associate in Tropical Convection and Precipitation";
+  const { items, dropped } = selectCandidates([
+    raw({ title: `CIRES: ${role}`, url: "https://a.org/j/1" }),
+    raw({ title: `NOAA: ${role}`, url: "https://b.org/j/9", source: "s2", sourceName: "Two" }),
+  ], { now: NOW });
+  assert.equal(items.length, 1);
+  assert.equal(dropped.duplicate, 1);
+});

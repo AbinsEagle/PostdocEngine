@@ -417,3 +417,24 @@ problem:
 aggregator/mirror site whenever one is findable — mirrors (Times Higher
 Education, DOE-ASR syndication, cross-posted university boards) go stale
 faster and less predictably than the source.
+
+---
+
+## 10 Nov 2026 — System redesign (no application activity)
+
+The dashboard was rebuilt as a search-first site: data now lives in
+`data/jobs.json` and `data/board.json`, search is MiniSearch (BM25, fuzzy,
+synonyms, `is:`/`in:`/`tag:` filters), and tabs follow from each entry's
+deadline instead of hand edits. A GitHub Actions job checks every tracked link
+twice a week and reads six job-board feeds into a separate Discover list.
+Nothing it finds is scored or added to the shortlist without Rona.
+
+First real link check (27 links): 18 fine, 6 problems, 3 unverifiable.
+- Pages that say "expired": KIT HITS, GFZ GenAI4Earth.
+- Not found: ETH Zurich fellowship; UChicago Project Cirrus (link now points to
+  the project announcement; the cohort had closed in January).
+- jobs.ac.uk links that land on a search page: Exeter, Birmingham. **The
+  Birmingham draft email still needs Rona's decision before anything is sent.**
+- Sites that refuse automated checks (cannot be verified, not necessarily dead):
+  Penn State, Columbia Lamont, Stanford.
+- Reclassified: CCRS Singapore and KAUST are leads (no specific call open).

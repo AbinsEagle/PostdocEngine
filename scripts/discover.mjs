@@ -12,7 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseFeed, looksLikeFeed } from "./lib/feed.mjs";
-import { screen, canonicalUrl, titleKey, idFor } from "./lib/relevance.mjs";
+import { screen, canonicalUrl, titleKey, idFor, splitTitle, alreadyTracked } from "./lib/relevance.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const TIMEOUT_MS = 25000;
@@ -50,10 +50,11 @@ async function fetchFeed(url) {
 /**
  * Turns raw feed items into the candidate list. Pure, so it can be tested.
  * @param {object[]} raw       items tagged with source and sourceName
- * @param {object}   opts      { tracked: string[] of job URLs, previous: object[] of earlier candidates, now: Date }
+ * @param {object}   opts      { tracked: job records ({url, org, title}) or URL strings, previous: earlier candidates, now: Date }
  */
 export function selectCandidates(raw, { tracked = [], previous = [], now = new Date() } = {}) {
-  const trackedUrls = new Set(tracked.map(canonicalUrl).filter(Boolean));
+  const trackedJobs = tracked.filter((j) => j && typeof j === "object");
+  const trackedUrls = new Set(tracked.map((j) => canonicalUrl(typeof j === "string" ? j : j && j.url)).filter(Boolean));
   const firstSeen = new Map(previous.map((p) => [p.id, p.firstSeen]));
   const today = now.toISOString().slice(0, 10);
   const cutoff = now.getTime() - MAX_AGE_DAYS * DAY_MS;
@@ -75,9 +76,12 @@ export function selectCandidates(raw, { tracked = [], previous = [], now = new D
     }
     const canon = canonicalUrl(item.url);
     if (!canon) continue;
-    if (trackedUrls.has(canon)) { dropped.tracked += 1; continue; }
+    if (trackedUrls.has(canon) || alreadyTracked(item, trackedJobs)) { dropped.tracked += 1; continue; }
     if (item.published && Date.parse(item.published) < cutoff) { dropped.old += 1; continue; }
-    const tkey = titleKey(item.title);
+    // Two boards often carry one posting under different employer prefixes, so compare the role alone
+    // (when it is long enough to be specific) as well as the full title.
+    const role = splitTitle(item.title).role;
+    const tkey = titleKey(role.split(/\s+/).length >= 4 ? role : item.title);
     if (seenUrls.has(canon) || seenTitles.has(tkey)) { dropped.duplicate += 1; continue; }
     seenUrls.add(canon);
     seenTitles.add(tkey);
@@ -159,7 +163,7 @@ async function main() {
   if (carried.length) console.log(`\nKept ${carried.length} earlier candidates from feeds that failed this run.`);
   raw.push(...carried);
 
-  const { items, dropped } = selectCandidates(raw, { tracked: jobs.map((j) => j.url), previous });
+  const { items, dropped } = selectCandidates(raw, { tracked: jobs, previous });
   for (const entry of report) entry.kept = items.filter((i) => i.source === entry.id).length;
 
   console.log(`\n${raw.length} items read · ${items.length} kept`);
