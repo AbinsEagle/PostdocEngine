@@ -1,5 +1,125 @@
 {
-  "generated": null,
-  "sources": [],
-  "items": []
+  "generated": "2026-11-12T09:52:02.206Z",
+  "sources": [
+    {
+      "id": "agu-career-center",
+      "name": "AGU Career Center",
+      "ok": true,
+      "fetched": 26,
+      "kept": 0
+    },
+    {
+      "id": "nature-careers",
+      "name": "Nature Careers",
+      "ok": true,
+      "fetched": 41,
+      "kept": 0
+    },
+    {
+      "id": "science-careers",
+      "name": "Science Careers",
+      "ok": true,
+      "fetched": 22,
+      "kept": 0
+    },
+    {
+      "id": "times-higher-education",
+      "name": "Times Higher Education",
+      "ok": true,
+      "fetched": 24,
+      "kept": 2
+    },
+    {
+      "id": "chronicle-jobs",
+      "name": "Chronicle of Higher Education",
+      "ok": true,
+      "fetched": 40,
+      "kept": 2
+    },
+    {
+      "id": "egu-jobs",
+      "name": "EGU Jobs",
+      "ok": true,
+      "fetched": 10,
+      "kept": 1
+    }
+  ],
+  "items": [
+    {
+      "id": "d-13e5f836f1dc",
+      "title": "UNIVERSITY OF VIENNA: Senior Scientist in Atmospheric Data Assimilation",
+      "url": "https://www.timeshighereducation.com/unijobs/listing/417141/senior-scientist-in-atmospheric-data-assimilation/?TrackID=8&utm_source=rss&utm_medium=feed&utm_campaign=general",
+      "source": "times-higher-education",
+      "sourceName": "Times Higher Education",
+      "published": "2026-10-30T05:24:00.000Z",
+      "summary": "EUR 5014.30 (payable 14 times per year / amount as of 1 January 2026): UNIVERSITY OF VIENNA: We are looking forward for an enthusiastic senior scientist to join the research group on “Numerical Weather Prediction (NWP) ... Vienna (Landbezirke) (AT)",
+      "matched": [
+        "weather prediction",
+        "data assimilation",
+        "atmosphere"
+      ],
+      "relevance": 11,
+      "firstSeen": "2026-11-12"
+    },
+    {
+      "id": "d-8d1942a35928",
+      "title": "University of Colorado System: CIRES / NOAA Physical Sciences Laboratory, Postdoctoral Associate in Tropical Ocean-Atmosphere",
+      "url": "https://jobs.chronicle.com/job/38057414/cires-noaa-physical-sciences-laboratory-postdoctoral-associate-in-tropical-ocean-atmosphere/?TrackID=10&utm_source=rss&utm_medium=feed&utm_campaign=general",
+      "source": "chronicle-jobs",
+      "sourceName": "Chronicle of Higher Education",
+      "published": "2026-10-28T09:00:00.000Z",
+      "summary": "Competitive Salary: University of Colorado System: Job Summary The University of Colorado’s Cooperative Institute for Research in Environmental Sciences (CIRES) and NOAA’s Physical Sciences Lab Boulder, Colorado, United States",
+      "matched": [
+        "tropical",
+        "atmosphere",
+        "teleconnections"
+      ],
+      "relevance": 10,
+      "firstSeen": "2026-11-12"
+    },
+    {
+      "id": "d-eaedb69f21c3",
+      "title": "postdoctoral vacancy in climate modelling of volcanic eruptions and epidemics at Lund University | Sweden | Full time",
+      "url": "https://www.egu.eu/jobs/8777/",
+      "source": "egu-jobs",
+      "sourceName": "EGU Jobs",
+      "published": "2026-11-09T17:43:25.000Z",
+      "summary": "Lund University, Department of Earth and Environmental Sciences, Lund, Sweden Subject Description Climate variability and abrupt climate perturbations can have profound consequences for ecosystems, agriculture, human populations and infectious disease. Large volcanic eruptions provide a natural example of such perturbations. Volcanic aerosols injected into the stratosphere reduce incoming solar…",
+      "matched": [
+        "climate dynamics",
+        "climate"
+      ],
+      "relevance": 8,
+      "firstSeen": "2026-11-12"
+    },
+    {
+      "id": "d-4df1d5114dd9",
+      "title": "University at Albany, SUNY: Postdoctoral Associate - Atmospheric Sciences Research Center (2 vacancies)",
+      "url": "https://jobs.chronicle.com/job/38059545/postdoctoral-associate-atmospheric-sciences-research-center-2-vacancies-/?TrackID=10&utm_source=rss&utm_medium=feed&utm_campaign=general",
+      "source": "chronicle-jobs",
+      "sourceName": "Chronicle of Higher Education",
+      "published": "2026-11-02T10:00:00.000Z",
+      "summary": "Competitive Salary: University at Albany, SUNY: About University at Albany: The University at Albany is a Carnegie-classified Research 1 institution driven by academic excellence, pioneering Albany, New York, United States",
+      "matched": [
+        "atmospheric science",
+        "atmosphere"
+      ],
+      "relevance": 8,
+      "firstSeen": "2026-11-12"
+    },
+    {
+      "id": "d-c7128f9fe94c",
+      "title": "MOHAMMED VI POLYTECHNIC UNIVERSITY: CRSA - Postdoctoral Research Fellowship, Developing Advanced Weather Prediction Models",
+      "url": "https://www.timeshighereducation.com/unijobs/listing/417394/crsa-postdoctoral-research-fellowship-developing-advanced-weather-prediction-models/?TrackID=8&utm_source=rss&utm_medium=feed&utm_campaign=general",
+      "source": "times-higher-education",
+      "sourceName": "Times Higher Education",
+      "published": "2026-11-06T01:41:00.000Z",
+      "summary": "MOHAMMED VI POLYTECHNIC UNIVERSITY: We are seeking a highly motivated and skilled Postdoctoral Research Fellow to join our multidisciplinary research team ... Benguerir, Morocco (MA)",
+      "matched": [
+        "weather prediction"
+      ],
+      "relevance": 6,
+      "firstSeen": "2026-11-12"
+    }
+  ]
 }

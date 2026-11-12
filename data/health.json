@@ -1,5 +1,188 @@
 {
-  "checked": null,
-  "summary": { "ok": 0, "problem": 0, "unverifiable": 0 },
-  "links": {}
+  "checked": "2026-11-12T09:51:32.693Z",
+  "summary": {
+    "total": 27,
+    "ok": 19,
+    "problem": 5,
+    "unverifiable": 3
+  },
+  "links": {
+    "ccrs-singapore": {
+      "url": "https://ccrs.weather.gov.sg/careers-internships/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "msca-pf-tu-delft": {
+      "url": "https://marie-sklodowska-curie-actions.ec.europa.eu/actions/postdoctoral-fellowships",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "eth-zurich-fellowship": {
+      "url": "https://ethz.ch/en/research/research-promotion/eth-fellowships.html",
+      "kind": "dead",
+      "http": 404,
+      "checked": "2026-11-12",
+      "detail": "the page is gone (HTTP 404)"
+    },
+    "tu-delft-euradca": {
+      "url": "https://careers.tudelft.nl/job/Delft-Postdoc-in-Radar-Based-Quantitative-Precipitation-Estimation-within-project-EuRadCA-2628-CD/1361379657/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "ictp-c3s-downscaling": {
+      "url": "https://www.ictp.it/opportunity/earth-system-physics-postdoctoral-fellowships-2026",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "ictp-closer-attribution": {
+      "url": "https://www.ictp.it/news/2026/6/four-climate-postdoc-positions-available",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "jsps-fellowship": {
+      "url": "https://www.jsps.go.jp/english/e-fellow/e-ippan/index.html",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "kaust-postdoc": {
+      "url": "https://kgfp.kaust.edu.sa/apply/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "kit-hits-wow": {
+      "url": "https://www.nature.com/naturecareers/job/12861291/postdoctoral-researcher-f-m-d-in-computer-science-or-statistics/",
+      "kind": "soft-closed",
+      "http": 200,
+      "checked": "2026-11-12",
+      "detail": "the page says: \"this job has expired\""
+    },
+    "gothenburg-par-2026-530": {
+      "url": "https://www.gu.se/en/work-at-the-university-of-gothenburg/vacancies",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "gfz-genai4earth": {
+      "url": "https://www.nature.com/naturecareers/job/12861313/postdoctoral-researcher-f_m_x-generative-ai-for-earth-system-sciences",
+      "kind": "soft-closed",
+      "http": 200,
+      "checked": "2026-11-12",
+      "detail": "the page says: \"this job has expired\""
+    },
+    "columbia-lamont-pdrs": {
+      "url": "http://www.ldeo.columbia.edu/postdoc",
+      "kind": "blocked",
+      "http": 403,
+      "checked": "2026-11-12",
+      "detail": "the site refuses automated checks (HTTP 403)",
+      "finalUrl": "https://lamont.columbia.edu/about/postdoctoral-fellowships"
+    },
+    "penn-state-pches-adapt": {
+      "url": "https://findajob.agu.org/job/8026736/postdoctoral-scholar-in-transdisciplinary-climate-research/",
+      "kind": "blocked",
+      "http": 403,
+      "checked": "2026-11-12",
+      "detail": "the site refuses automated checks (HTTP 403)"
+    },
+    "exeter-natalie": {
+      "url": "https://www.jobs.ac.uk/job/DSE987/postdoctoral-research-fellow",
+      "kind": "redirected-home",
+      "http": 200,
+      "checked": "2026-11-12",
+      "detail": "now redirects to https://www.jobs.ac.uk/search/?academicDisciplineFacet[0]=physical-and-environmental-sciences&subDisciplineFacet[0]=environmental-sciences&academicDisciplineFacet[1]=computer-sciences",
+      "finalUrl": "https://www.jobs.ac.uk/search/?academicDisciplineFacet[0]=physical-and-environmental-sciences&subDisciplineFacet[0]=environmental-sciences&academicDisciplineFacet[1]=computer-sciences&subDisciplineFacet[1]=artificial-intelligence&academicDisciplineFacet[2]=engineering-and-technology&subDisciplineFacet[2]=civil-engineering&salaryBandFacet[0]=40000-49999&salaryBandFacet[1]=50000-59999&salaryBandFacet[2]=30000-39999&salaryBandFacet[3]=60000-69999&expired-job-redirect=true"
+    },
+    "birmingham-heppi-ml": {
+      "url": "https://www.jobs.ac.uk/job/DQU681/research-fellow-in-weather-forecast-postprocessing-with-machine-learning-school-of-geography-earth-and-environmental-sciences",
+      "kind": "redirected-home",
+      "http": 200,
+      "checked": "2026-11-12",
+      "detail": "now redirects to https://www.jobs.ac.uk/search/?academicDisciplineFacet[0]=physical-and-environmental-sciences&subDisciplineFacet[0]=physics-and-astronomy&subDisciplineFacet[1]=geography&subDiscipline",
+      "finalUrl": "https://www.jobs.ac.uk/search/?academicDisciplineFacet[0]=physical-and-environmental-sciences&subDisciplineFacet[0]=physics-and-astronomy&subDisciplineFacet[1]=geography&subDisciplineFacet[2]=environmental-sciences&academicDisciplineFacet[1]=mathematics-and-statistics&subDisciplineFacet[3]=mathematics&subDisciplineFacet[4]=statistics&salaryBandFacet[0]=30000-39999&salaryBandFacet[1]=40000-49999&salaryBandFacet[2]=25000-29999&salaryBandFacet[3]=50000-59999&expired-job-redirect=true"
+    },
+    "uchicago-project-cirrus": {
+      "url": "https://news.uchicago.edu/story/uchicago-team-wins-funding-develop-ai-weather-forecasts-underserved-areas",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "mpi-m-incubator": {
+      "url": "https://mpimet.mpg.de/en/career/postdoc-opportunities",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "kyoto-rish": {
+      "url": "https://www.rish.kyoto-u.ac.jp/category/news_en/?lang=en",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "iap-cas-beijing": {
+      "url": "https://pifi.cas.cn/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12",
+      "detail": "the page loads, but its content is drawn by script and could not be read",
+      "finalUrl": "http://pifi.cas.cn/front/index.html?_=1786616613275"
+    },
+    "argonne-aeris-s2s": {
+      "url": "https://argonne.wd1.myworkdayjobs.com/en-US/Argonne_Careers/job/Postdoctoral-Appointee---AI-Foundation-Models-for-Atmospheric-Science_421783",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12",
+      "detail": "the page loads, but its content is drawn by script and could not be read"
+    },
+    "nus-ml-hydromet": {
+      "url": "https://careers.nus.edu.sg/job/Research-Fellow-%28Machine-Learning-for-Hydro-Meteorological-Domain%29/29756-en_GB",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "ntu-ocean-center-s2s": {
+      "url": "https://www.egu.eu/jobs/7871/postdoctoral-research-or-higher-level-opportunity-in-data-assimilation-and-ai-enhanced-s2s-forecast/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "stanford-thompson": {
+      "url": "https://findajob.agu.org/job/8027878/postdoctoral-scholar-in-convection-rainstorms-and-climate-at-stanford/",
+      "kind": "blocked",
+      "http": 403,
+      "checked": "2026-11-12",
+      "detail": "the site refuses automated checks (HTTP 403)"
+    },
+    "columbia-ldeo-monsoon-lps": {
+      "url": "https://www.gewex.org/resources/position-announcements/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "uc-irvine-s2s": {
+      "url": "https://recruit.ap.uci.edu/JPF10438",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "ucar-cgc-fellowship": {
+      "url": "https://cpaess.ucar.edu/cgc/annual-recruitment-announcement",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12"
+    },
+    "mbzuai-ai-weather": {
+      "url": "https://careers.mbzuai.ac.ae/research-vacancies/",
+      "kind": "ok",
+      "http": 200,
+      "checked": "2026-11-12",
+      "finalUrl": "https://careers.mbzuai.ac.ae/postdoc-and-research-support-vacancies/"
+    }
+  }
 }
