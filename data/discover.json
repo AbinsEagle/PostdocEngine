@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-16T09:45:07.924Z",
+  "generated": "2026-11-19T10:22:24.784Z",
   "sources": [
     {
       "id": "agu-career-center",
@@ -12,14 +12,14 @@
       "id": "nature-careers",
       "name": "Nature Careers",
       "ok": true,
-      "fetched": 40,
+      "fetched": 42,
       "kept": 0
     },
     {
       "id": "science-careers",
       "name": "Science Careers",
       "ok": true,
-      "fetched": 16,
+      "fetched": 20,
       "kept": 0
     },
     {
@@ -34,14 +34,14 @@
       "name": "Chronicle of Higher Education",
       "ok": true,
       "fetched": 40,
-      "kept": 1
+      "kept": 2
     },
     {
       "id": "egu-jobs",
       "name": "EGU Jobs",
       "ok": true,
       "fetched": 10,
-      "kept": 2
+      "kept": 0
     }
   ],
   "items": [
@@ -62,35 +62,20 @@
       "firstSeen": "2026-11-12"
     },
     {
-      "id": "d-d50633b89f1e",
-      "title": "(Senior) Atmospheric Scientist, Human-Centered Weather Forecasts | Indonesia | Full time",
-      "url": "https://www.egu.eu/jobs/8792/",
-      "source": "egu-jobs",
-      "sourceName": "EGU Jobs",
-      "published": "2026-11-12T21:59:02.000Z",
-      "summary": "Development Innovation Lab, Indonesia The Development Innovation Lab at the University of Chicago uses the tools of economics to develop innovations with the potential to benefit millions of people in low- and middle-income countries. It was founded and is led by Nobel laureate Michael Kremer. Human-Centered Weather Forecast Initiative The Human-Centered Weather Forecast (HCWF) Initiative works…",
+      "id": "d-989a749163e1",
+      "title": "University of Minnesota: Postdoctoral Researcher – Machine Learning River Forecasting",
+      "url": "https://jobs.chronicle.com/job/38066621/postdoctoral-researcher-machine-learning-river-forecasting/?TrackID=10&utm_source=rss&utm_medium=feed&utm_campaign=general",
+      "source": "chronicle-jobs",
+      "sourceName": "Chronicle of Higher Education",
+      "published": "2026-11-13T10:00:00.000Z",
+      "summary": "Competitive Salary: University of Minnesota: About the Job The University of Minnesota Climate Adaptation Partnership and Department of Soil, Water, and Climate is seeking a highly Twin Cities, Minnesota, United States",
       "matched": [
-        "weather prediction",
-        "atmosphere",
+        "machine learning",
+        "climate",
         "forecasting"
       ],
-      "relevance": 10,
-      "firstSeen": "2026-11-16"
-    },
-    {
-      "id": "d-634ed3325d96",
-      "title": "Research Scientist - Heat Forecasting, Human-Centered Weather Forecasts | India | Full time",
-      "url": "https://www.egu.eu/jobs/8790/",
-      "source": "egu-jobs",
-      "sourceName": "EGU Jobs",
-      "published": "2026-11-12T21:33:42.000Z",
-      "summary": "Development Innovation Lab- India, India The University of Chicago Trust (the Trust) is a charitable trust in India, established in 2008 by alumnus of The University of Chicago. The Trust’s objectives are to provide opportunities for grants to support educational programs, research programs and activities for the betterment of India. The Development Innovation Lab – India (DIL-India) DIL-India,…",
-      "matched": [
-        "weather prediction",
-        "forecasting"
-      ],
-      "relevance": 8,
-      "firstSeen": "2026-11-16"
+      "relevance": 9,
+      "firstSeen": "2026-11-19"
     },
     {
       "id": "d-4df1d5114dd9",
